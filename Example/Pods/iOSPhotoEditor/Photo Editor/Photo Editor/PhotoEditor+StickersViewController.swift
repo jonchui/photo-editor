@@ -65,7 +65,8 @@ extension PhotoEditorViewController: StickersViewControllerDelegate {
         imageView.contentMode = .scaleAspectFit
         imageView.frame.size = CGSize(width: 50, height: 50)
         imageView.center = canvasImageView.center
-        
+//        imageView.backgroundColor = UIColor.green
+
         self.canvasImageView.addSubview(imageView)
         //Gestures
         addGestures(view: imageView)
@@ -79,6 +80,8 @@ extension PhotoEditorViewController: StickersViewControllerDelegate {
     func addGestures(view: UIView) {
         //Gestures
         view.isUserInteractionEnabled = true
+        view.isOpaque = true
+        view.alpha = 1.0
         
         let panGesture = UIPanGestureRecognizer(target: self,
                                                 action: #selector(PhotoEditorViewController.panGesture))

@@ -23,12 +23,29 @@ class ViewController: UIViewController {
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
     }
+
+    // returns whether saved correctly or not
+    func saveImageDocumentDirectory(_ image: UIImage, path: String) -> Bool {
+        let fileManager = FileManager.default
+        let imageData = UIImageJPEGRepresentation(image, 1.0)
+        return fileManager.createFile(atPath: path, contents: imageData, attributes: nil)
+    }
+
+    var LocalDocumentsFolder: URL {
+        let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        return URL(string: documents)!
+    }
 }
 
 extension ViewController: PhotoEditorDelegate {
-    
+
     func doneEditing(image: UIImage) {
         imageView.image = image
+
+
+        let path = LocalDocumentsFolder.appendingPathComponent("annotatedimage.jpeg")
+        saveImageDocumentDirectory(image, path: path.absoluteString)
+
     }
     
     func canceledEditing() {
@@ -46,7 +63,11 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             return
         }
         picker.dismiss(animated: true, completion: nil)
-        
+
+
+        let path = LocalDocumentsFolder.appendingPathComponent("originalimage.jpeg")
+        saveImageDocumentDirectory(image, path: path.absoluteString)
+
         
         let photoEditor = PhotoEditorViewController(nibName:"PhotoEditorViewController",bundle: Bundle(for: PhotoEditorViewController.self))
         photoEditor.photoEditorDelegate = self

@@ -143,7 +143,7 @@ extension PhotoEditorViewController {
             case .sticker:
                 stickerButton.isHidden = true
             case .text:
-                stickerButton.isHidden = true
+                textButton.isHidden = true
             }
         }
     }

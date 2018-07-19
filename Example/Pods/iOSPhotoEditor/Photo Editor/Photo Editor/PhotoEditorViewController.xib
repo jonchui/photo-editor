@@ -56,44 +56,6 @@
                         <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n3p-yR-4xc">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         </imageView>
-                        <view alpha="0.60000002384185791" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PBM-2c-maq" userLabel="MenuView">
-                            <rect key="frame" x="0.0" y="519" width="375" height="70"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wkT-uS-6sE">
-                                    <rect key="frame" x="35" y="10" width="305" height="50"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8AE-uq-UGo">
-                                            <rect key="frame" x="248" y="0.0" width="50" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="50" id="AUc-WQ-1ff"/>
-                                                <constraint firstAttribute="height" constant="50" id="qbW-Ea-J2s"/>
-                                            </constraints>
-                                            <state key="normal" title="Button" image="icon_delete_idle">
-                                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
-                                            <state key="highlighted" image="icon_delete_click"/>
-                                            <connections>
-                                                <action selector="cancelButtonTapped:" destination="-1" eventType="touchUpInside" id="7pA-QF-X24"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="8AE-uq-UGo" secondAttribute="trailing" constant="7.5" id="94x-S6-DXo"/>
-                                        <constraint firstItem="8AE-uq-UGo" firstAttribute="centerY" secondItem="wkT-uS-6sE" secondAttribute="centerY" id="GqI-dG-xru"/>
-                                        <constraint firstAttribute="height" constant="50" id="M3e-Yr-Bjy"/>
-                                        <constraint firstAttribute="width" constant="305" id="kvx-6z-sGS"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <gestureRecognizers/>
-                            <constraints>
-                                <constraint firstItem="wkT-uS-6sE" firstAttribute="centerY" secondItem="PBM-2c-maq" secondAttribute="centerY" id="Vkc-UU-nPV"/>
-                                <constraint firstItem="wkT-uS-6sE" firstAttribute="centerX" secondItem="PBM-2c-maq" secondAttribute="centerX" id="obR-Pf-uoc"/>
-                                <constraint firstAttribute="height" constant="70" id="oss-9h-hEn"/>
-                            </constraints>
-                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -252,7 +214,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="87h-1G-t5q">
                     <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ZRl-89-gRO">
+                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ZRl-89-gRO">
                             <rect key="frame" x="12" y="0.0" width="120" height="52"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mW4-Jz-sic">
@@ -411,7 +373,5 @@
         <image name="camera_icon_highlight_idle" width="102" height="102"/>
         <image name="camera_icon_ptr_click" width="102" height="102"/>
         <image name="camera_icon_ptr_idle" width="102" height="102"/>
-        <image name="icon_delete_click" width="64" height="64"/>
-        <image name="icon_delete_idle" width="64" height="64"/>
     </resources>
 </document>

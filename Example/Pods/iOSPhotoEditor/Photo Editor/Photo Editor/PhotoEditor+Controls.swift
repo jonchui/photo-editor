@@ -41,6 +41,18 @@ extension PhotoEditorViewController {
         addStickersViewController()
     }
 
+    @IBAction func addTextStickerTapped(_ sender: Any) {
+        textButtonTapped(sender)
+    }
+
+    @IBAction func addCircleStickerTapped(_ sender: Any) {
+        didSelectImage(image: #imageLiteral(resourceName: "camera_circle"))
+    }
+
+    @IBAction func addArrowStickerTapped(_ sender: Any) {
+        didSelectImage(image: #imageLiteral(resourceName: "camera_pointer"))
+    }
+
     @IBAction func drawButtonTapped(_ sender: Any) {
         isDrawing = true
         canvasImageView.isUserInteractionEnabled = false

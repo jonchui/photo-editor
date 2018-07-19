@@ -52,15 +52,14 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         photoEditor.photoEditorDelegate = self
         photoEditor.image = image
         //Colors for drawing and Text, If not set default values will be used
-        //photoEditor.colors = [.red, .blue, .green]
+        photoEditor.colors = [.red, .blue, .green]
         
         //Stickers that the user will choose from to add on the image
-        for i in 0...10 {
-            photoEditor.stickers.append(UIImage(named: i.description )!)
-        }
+        photoEditor.stickers.append(#imageLiteral(resourceName: "camera_pointer"))
+        photoEditor.stickers.append(#imageLiteral(resourceName: "camera_circle"))
         
         //To hide controls - array of enum control
-        //photoEditor.hiddenControls = [.crop, .draw, .share]
+        photoEditor.hiddenControls = [.crop, .draw, .share, .sticker, .text]
         
         present(photoEditor, animated: true, completion: nil)
     }

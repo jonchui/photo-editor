@@ -13,7 +13,7 @@ extension UIView {
     /**
      Convert UIView to UIImage
      */
-    func toHighQualityImage(originalImage: UIImage) -> UIImage {
+    func toImagePreservingOrignalResolution(originalImage: UIImage) -> UIImage {
         return build(originalImage, workingView:self)!
 //        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 0.0)
 //        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)
@@ -22,7 +22,7 @@ extension UIView {
 //        return snapshotImageFromMyView!
     }
 
-    //  Converted with Swiftify v1.0.6472 - https://objectivec2swift.com/
+    // source: https://github.com/yackle/CLImageEditor/blob/master/OptionalImageTools/CLStickerTool/CLStickerTool.m#L179 in objective-c, converted to swift using Swiftify v1.0.6472 - https://objectivec2swift.com/
     func build(_ originalImage: UIImage, workingView: UIView) -> UIImage? {
 
         let scale = originalImage.size.width / workingView.bounds.width

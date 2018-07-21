@@ -94,11 +94,11 @@ extension PhotoEditorViewController {
     //MARK: Bottom Toolbar
     
     @IBAction func saveButtonTapped(_ sender: AnyObject) {
-        UIImageWriteToSavedPhotosAlbum(canvasView.toHighQualityImage(originalImage: image!),self, #selector(PhotoEditorViewController.image(_:withPotentialError:contextInfo:)), nil)
+        UIImageWriteToSavedPhotosAlbum(canvasView.toImagePreservingOrignalResolution(originalImage: image!),self, #selector(PhotoEditorViewController.image(_:withPotentialError:contextInfo:)), nil)
     }
     
     @IBAction func shareButtonTapped(_ sender: UIButton) {
-        let activity = UIActivityViewController(activityItems: [canvasView.toHighQualityImage(originalImage: image!)], applicationActivities: nil)
+        let activity = UIActivityViewController(activityItems: [canvasView.toImagePreservingOrignalResolution(originalImage: image!)], applicationActivities: nil)
         present(activity, animated: true, completion: nil)
         
     }
@@ -113,7 +113,7 @@ extension PhotoEditorViewController {
     }
     
     @IBAction func continueButtonPressed(_ sender: Any) {
-        let img = self.canvasView.toHighQualityImage(originalImage: image!)
+        let img = self.canvasView.toImagePreservingOrignalResolution(originalImage: image!)
         photoEditorDelegate?.doneEditing(image: img)
         self.dismiss(animated: true, completion: nil)
     }

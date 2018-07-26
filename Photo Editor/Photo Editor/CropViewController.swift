@@ -54,31 +54,31 @@ open class CropViewController: UIViewController {
     }
 
     fileprivate var cropView: CropView?
-    
+
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialize()
     }
-    
+
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         initialize()
     }
-    
+
     fileprivate func initialize() {
         rotationEnabled = true
     }
-    
+
     open override func loadView() {
         let contentView = UIView()
         contentView.autoresizingMask = .flexibleWidth
         contentView.backgroundColor = UIColor.black
         view = contentView
-        
+
         // Add CropView
         cropView = CropView(frame: contentView.bounds)
         contentView.addSubview(cropView!)
-        
+
     }
 
     open override func viewDidLoad() {
@@ -88,49 +88,49 @@ open class CropViewController: UIViewController {
         navigationController?.toolbar.isTranslucent = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(CropViewController.cancel(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(CropViewController.done(_:)))
-        
+
         if self.toolbarItems == nil {
             let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
             let constrainButton = UIBarButtonItem(title: "Constrain", style: .plain, target: self, action: #selector(CropViewController.constrain(_:)))
             toolbarItems = [flexibleSpace, constrainButton, flexibleSpace]
         }
-        
+
         navigationController?.isToolbarHidden = toolbarHidden
-        
+
         cropView?.image = image
         cropView?.rotationGestureRecognizer.isEnabled = rotationEnabled
     }
-    
+
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if cropAspectRatio != 0 {
             cropView?.cropAspectRatio = cropAspectRatio
         }
-        
+
         if !cropRect.equalTo(CGRect.zero) {
             adjustCropRect()
         }
-        
+
         if !imageCropRect.equalTo(CGRect.zero) {
             cropView?.imageCropRect = imageCropRect
         }
-        
+
         cropView?.keepAspectRatio = keepAspectRatio
     }
-    
+
     open func resetCropRect() {
         cropView?.resetCropRect()
     }
-    
+
     open func resetCropRectAnimated(_ animated: Bool) {
         cropView?.resetCropRectAnimated(animated)
     }
-    
+
     func cancel(_ sender: UIBarButtonItem) {
         delegate?.cropViewControllerDidCancel(self)
     }
-    
+
     func done(_ sender: UIBarButtonItem) {
         if let image = cropView?.croppedImage {
             guard let rotation = cropView?.rotation else {
@@ -142,7 +142,7 @@ open class CropViewController: UIViewController {
             delegate?.cropViewController(self, didFinishCroppingImage: image, transform: rotation, cropRect: rect)
         }
     }
-    
+
     func constrain(_ sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let original = UIAlertAction(title: "Original", style: .default) { [unowned self] action in
@@ -217,27 +217,25 @@ open class CropViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
         actionSheet.addAction(cancel)
-        
+
         present(actionSheet, animated: true, completion: nil)
     }
 
     // MARK: - Private methods
     fileprivate func adjustCropRect() {
         imageCropRect = CGRect.zero
-        
+
         guard var cropViewCropRect = cropView?.cropRect else {
             return
         }
         cropViewCropRect.origin.x += cropRect.origin.x
         cropViewCropRect.origin.y += cropRect.origin.y
-        
+
         let minWidth = min(cropViewCropRect.maxX - cropViewCropRect.minX, cropRect.width)
         let minHeight = min(cropViewCropRect.maxY - cropViewCropRect.minY, cropRect.height)
         let size = CGSize(width: minWidth, height: minHeight)
         cropViewCropRect.size = size
         cropView?.cropRect = cropViewCropRect
     }
-    
-    
 
 }

@@ -9,9 +9,9 @@
 import UIKit
 
 class GradientView: UIView {
-    
+
     @IBInspectable public var gradientFromtop: Bool = true
-    
+
     var gradientLayer = CAGradientLayer()
 
     override func awakeFromNib() {
@@ -26,10 +26,10 @@ class GradientView: UIView {
         backgroundColor = UIColor.clear
         layer.addSublayer(gradientLayer)
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds
     }
-    
+
 }

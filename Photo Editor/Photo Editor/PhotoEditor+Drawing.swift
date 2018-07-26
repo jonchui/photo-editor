@@ -9,9 +9,9 @@
 import UIKit
 
 extension PhotoEditorViewController {
-    
+
     override public func touchesBegan(_ touches: Set<UITouch>,
-                                      with event: UIEvent?){
+                                      with event: UIEvent?) {
         if isDrawing {
             swiped = false
             if let touch = touches.first {
@@ -27,35 +27,35 @@ extension PhotoEditorViewController {
                 }
             }
         }
-        
+
     }
-    
+
     override public func touchesMoved(_ touches: Set<UITouch>,
-                                      with event: UIEvent?){
+                                      with event: UIEvent?) {
         if isDrawing {
             // 6
             swiped = true
             if let touch = touches.first {
                 let currentPoint = touch.location(in: canvasImageView)
                 drawLineFrom(lastPoint, toPoint: currentPoint)
-                
+
                 // 7
                 lastPoint = currentPoint
             }
         }
     }
-    
+
     override public func touchesEnded(_ touches: Set<UITouch>,
-                                      with event: UIEvent?){
+                                      with event: UIEvent?) {
         if isDrawing {
             if !swiped {
                 // draw a single point
                 drawLineFrom(lastPoint, toPoint: lastPoint)
             }
         }
-        
+
     }
-    
+
     func drawLineFrom(_ fromPoint: CGPoint, toPoint: CGPoint) {
         // 1
         UIGraphicsBeginImageContext(canvasImageView.frame.size)
@@ -76,5 +76,5 @@ extension PhotoEditorViewController {
             UIGraphicsEndImageContext()
         }
     }
-    
+
 }

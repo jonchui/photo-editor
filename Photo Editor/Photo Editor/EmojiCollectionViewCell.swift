@@ -11,7 +11,7 @@ import UIKit
 class EmojiCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var emojiLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }

@@ -8,11 +8,10 @@
 
 import Foundation
 
-
 import UIKit
 
-extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
-    
+extension PhotoEditorViewController : UIGestureRecognizerDelegate {
+
     /**
      UIPanGestureRecognizer - Moving Objects
      Selecting transparent parts of the imageview won't move the object
@@ -32,7 +31,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
             }
         }
     }
-    
+
     /**
      UIPinchGestureRecognizer - Pinching Objects
      If it's a UITextView will make the font bigger so it doen't look pixlated
@@ -41,7 +40,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
         if let view = recognizer.view {
             if view is UITextView {
                 let textView = view as! UITextView
-                
+
                 if textView.font!.pointSize * recognizer.scale < 90 {
                     let font = UIFont(name: textView.font!.fontName, size: textView.font!.pointSize * recognizer.scale)
                     textView.font = font
@@ -55,8 +54,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
                     textView.bounds.size = CGSize(width: textView.intrinsicContentSize.width,
                                                   height: sizeToFit.height)
                 }
-                
-                
+
                 textView.setNeedsDisplay()
             } else {
                 view.transform = view.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
@@ -64,7 +62,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
             recognizer.scale = 1
         }
     }
-    
+
     /**
      UIRotationGestureRecognizer - Rotating Objects
      */
@@ -74,7 +72,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
             recognizer.rotation = 0
         }
     }
-    
+
     /**
      UITapGestureRecognizer - Taping on Objects
      Will make scale scale Effect
@@ -97,22 +95,22 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
             }
         }
     }
-    
+
     /*
      Support Multiple Gesture at the same time
      */
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
-    
+
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
-    
+
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
-    
+
     func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
         if recognizer.state == .recognized {
             if !stickersVCIsVisible {
@@ -120,18 +118,18 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
             }
         }
     }
-    
+
     // to Override Control Center screen edge pan from bottom
     override public var prefersStatusBarHidden: Bool {
         return true
     }
-    
+
     /**
      Scale Effect
      */
     func scaleEffect(view: UIView) {
         view.superview?.bringSubview(toFront: view)
-        
+
         if #available(iOS 10.0, *) {
             let generator = UIImpactFeedbackGenerator(style: .heavy)
             generator.impactOccurred()
@@ -147,26 +145,26 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
                         }
         })
     }
-    
+
     /**
      Moving Objects 
      delete the view if it's inside the delete view
      Snap the view back if it's out of the canvas
      */
 
-    func moveView(view: UIView, recognizer: UIPanGestureRecognizer)  {
-        
+    func moveView(view: UIView, recognizer: UIPanGestureRecognizer) {
+
         hideToolbar(hide: true)
         deleteView.isHidden = false
-        
+
         view.superview?.bringSubview(toFront: view)
         let pointToSuperView = recognizer.location(in: self.view)
 
         view.center = CGPoint(x: view.center.x + recognizer.translation(in: canvasImageView).x,
                               y: view.center.y + recognizer.translation(in: canvasImageView).y)
-        
+
         recognizer.setTranslation(CGPoint.zero, in: canvasImageView)
-        
+
         if let previousPoint = lastPanPoint {
             //View is going into deleteView
             if deleteView.frame.contains(pointToSuperView) && !deleteView.frame.contains(previousPoint) {
@@ -189,14 +187,14 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
             }
         }
         lastPanPoint = pointToSuperView
-        
+
         if recognizer.state == .ended {
             imageViewToPan = nil
             lastPanPoint = nil
             hideToolbar(hide: false)
             deleteView.isHidden = true
             let point = recognizer.location(in: self.view)
-            
+
             if deleteView.frame.contains(point) { // Delete the view
                 view.removeFromSuperview()
                 if #available(iOS 10.0, *) {
@@ -207,11 +205,11 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
                 UIView.animate(withDuration: 0.3, animations: {
                     view.center = self.canvasImageView.center
                 })
-                
+
             }
         }
     }
-    
+
     func subImageViews(view: UIView) -> [UIImageView] {
         var imageviews: [UIImageView] = []
         for imageView in view.subviews {

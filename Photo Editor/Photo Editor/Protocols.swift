@@ -25,7 +25,6 @@ public protocol PhotoEditorDelegate {
     func canceledEditing()
 }
 
-
 /**
  - didSelectView
  - didSelectImage

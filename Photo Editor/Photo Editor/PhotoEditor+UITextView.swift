@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension PhotoEditorViewController: UITextViewDelegate {
-    
+
     public func textViewDidChange(_ textView: UITextView) {
         let rotation = atan2(textView.transform.b, textView.transform.a)
         if rotation == 0 {
@@ -33,9 +33,9 @@ extension PhotoEditorViewController: UITextViewDelegate {
                         textView.center = CGPoint(x: UIScreen.main.bounds.width / 2,
                                                   y:  UIScreen.main.bounds.height / 5)
         }, completion: nil)
-        
+
     }
-    
+
     public func textViewDidEndEditing(_ textView: UITextView) {
         guard lastTextViewTransform != nil && lastTextViewTransCenter != nil && lastTextViewFont != nil
             else {
@@ -49,5 +49,5 @@ extension PhotoEditorViewController: UITextViewDelegate {
                         textView.center = self.lastTextViewTransCenter!
         }, completion: nil)
     }
-    
+
 }

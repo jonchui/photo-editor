@@ -22,8 +22,8 @@ public enum control {
 
 extension PhotoEditorViewController {
 
-     //MARK: Top Toolbar
-    
+     // MARK: Top Toolbar
+
     @IBAction func cancelButtonTapped(_ sender: Any) {
         photoEditorDelegate?.canceledEditing()
         self.dismiss(animated: true, completion: nil)
@@ -65,7 +65,7 @@ extension PhotoEditorViewController {
         isTyping = true
         let textView = UITextView(frame: CGRect(x: 0, y: canvasImageView.center.y,
                                                 width: UIScreen.main.bounds.width, height: 30))
-        
+
         textView.textAlignment = .center
         textView.font = UIFont(name: "Helvetica", size: 30)
         textView.textColor = textColor
@@ -80,8 +80,8 @@ extension PhotoEditorViewController {
         self.canvasImageView.addSubview(textView)
         addGestures(view: textView)
         textView.becomeFirstResponder()
-    }    
-    
+    }
+
     @IBAction func doneButtonTapped(_ sender: Any) {
         view.endEditing(true)
         doneButton.isHidden = true
@@ -90,19 +90,19 @@ extension PhotoEditorViewController {
         hideToolbar(hide: false)
         isDrawing = false
     }
-    
-    //MARK: Bottom Toolbar
-    
+
+    // MARK: Bottom Toolbar
+
     @IBAction func saveButtonTapped(_ sender: AnyObject) {
         UIImageWriteToSavedPhotosAlbum(canvasView.toImagePreservingOrignalResolution(originalImage: image!),self, #selector(PhotoEditorViewController.image(_:withPotentialError:contextInfo:)), nil)
     }
-    
+
     @IBAction func shareButtonTapped(_ sender: UIButton) {
         let activity = UIActivityViewController(activityItems: [canvasView.toImagePreservingOrignalResolution(originalImage: image!)], applicationActivities: nil)
         present(activity, animated: true, completion: nil)
-        
+
     }
-    
+
     @IBAction func clearButtonTapped(_ sender: AnyObject) {
         //clear drawing
         canvasImageView.image = nil
@@ -111,7 +111,7 @@ extension PhotoEditorViewController {
             subview.removeFromSuperview()
         }
     }
-    
+
     @IBAction func continueButtonPressed(_ sender: Any) {
         let img = self.canvasView.toImagePreservingOrignalResolution(originalImage: image!)
         photoEditorDelegate?.doneEditing(image: img)
@@ -119,17 +119,17 @@ extension PhotoEditorViewController {
     }
 
     //MAKR: helper methods
-    
+
     func image(_ image: UIImage, withPotentialError error: NSErrorPointer, contextInfo: UnsafeRawPointer) {
         let alert = UIAlertController(title: "Image Saved", message: "Image successfully saved to Photos library", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    
+
     func hideControls() {
         for control in hiddenControls {
             switch control {
-                
+
             case .clear:
                 clearButton.isHidden = true
             case .crop:
@@ -147,5 +147,5 @@ extension PhotoEditorViewController {
             }
         }
     }
-    
+
 }

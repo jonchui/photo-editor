@@ -9,13 +9,13 @@
 import UIKit
 
 class ColorCollectionViewCell: UICollectionViewCell {
-    
+
     @IBOutlet weak var colorView: UIView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         colorView.layer.cornerRadius = colorView.frame.width / 2
@@ -23,7 +23,7 @@ class ColorCollectionViewCell: UICollectionViewCell {
         colorView.layer.borderWidth = 1.0
         colorView.layer.borderColor = UIColor.white.cgColor
     }
-    
+
     override var isSelected: Bool {
         didSet {
             if isSelected {

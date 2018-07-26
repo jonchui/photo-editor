@@ -29,20 +29,20 @@ class ResizeControl: UIView {
         super.init(frame: CGRect(x: 0, y: 0, width: 44.0, height: 44.0))
         initialize()
     }
-    
+
     fileprivate func initialize() {
         backgroundColor = UIColor.clear
         isExclusiveTouch = true
-        
+
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ResizeControl.handlePan(_:)))
         addGestureRecognizer(gestureRecognizer)
     }
-    
+
     func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
         if !enabled {
             return
         }
-        
+
         switch gestureRecognizer.state {
         case .began:
             let translation = gestureRecognizer.translation(in: superview)
@@ -56,6 +56,6 @@ class ResizeControl: UIView {
             delegate?.resizeControlDidEndResizing(self)
         default: ()
         }
-        
+
     }
 }

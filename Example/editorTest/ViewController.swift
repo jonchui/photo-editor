@@ -10,13 +10,13 @@ import UIKit
 import iOSPhotoEditor
 
 class ViewController: UIViewController {
-    
+
     @IBOutlet weak var imageView: UIImageView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     @IBAction func pickImageButtonTapped(_ sender: Any) {
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -42,49 +42,46 @@ extension ViewController: PhotoEditorDelegate {
     func doneEditing(image: UIImage) {
         imageView.image = image
 
-
         let path = LocalDocumentsFolder.appendingPathComponent("annotatedimage.jpeg")
         saveImageDocumentDirectory(image, path: path.absoluteString)
 
     }
-    
+
     func canceledEditing() {
         print("Canceled")
     }
 }
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : Any]) {
-        
+
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             picker.dismiss(animated: true, completion: nil)
             return
         }
         picker.dismiss(animated: true, completion: nil)
 
-
         let path = LocalDocumentsFolder.appendingPathComponent("originalimage.jpeg")
         saveImageDocumentDirectory(image, path: path.absoluteString)
 
-        
         let photoEditor = PhotoEditorViewController(nibName:"PhotoEditorViewController",bundle: Bundle(for: PhotoEditorViewController.self))
         photoEditor.photoEditorDelegate = self
         photoEditor.image = image
         //Colors for drawing and Text, If not set default values will be used
         photoEditor.colors = [.red, .blue, .green]
-        
+
         //Stickers that the user will choose from to add on the image
         photoEditor.stickers.append(#imageLiteral(resourceName: "camera_pointer"))
         photoEditor.stickers.append(#imageLiteral(resourceName: "camera_circle"))
-        
+
         //To hide controls - array of enum control
         photoEditor.hiddenControls = [.text, .crop, .draw, .share, .sticker]
-        
+
         present(photoEditor, animated: true, completion: nil)
     }
-    
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }

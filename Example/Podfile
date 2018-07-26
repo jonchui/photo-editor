@@ -6,6 +6,5 @@ target 'editorTest' do
   use_frameworks!
 
   # Pods for editorTest
-  pod 'iOSPhotoEditor' 
 
 end

@@ -58,12 +58,12 @@ extension PhotoEditorViewController: StickersViewControllerDelegate {
         addGestures(view: view)
     }
     
-    func didSelectImage(image: UIImage) {
+    func didSelectImage(image: UIImage, size: CGSize = CGSize(width: 50, height: 50)) {
         self.removeStickersView()
-        
+
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
-        imageView.frame.size = CGSize(width: 50, height: 50)
+        imageView.frame.size = size
         imageView.center = canvasImageView.center
 //        imageView.backgroundColor = UIColor.green
 

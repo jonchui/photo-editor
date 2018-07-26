@@ -46,11 +46,11 @@ extension PhotoEditorViewController {
     }
 
     @IBAction func addCircleStickerTapped(_ sender: Any) {
-        didSelectImage(image: #imageLiteral(resourceName: "camera_circle"))
+        didSelectImage(image: #imageLiteral(resourceName: "camera_circle"), size:CGSize(width: 100, height: 100))
     }
 
     @IBAction func addArrowStickerTapped(_ sender: Any) {
-        didSelectImage(image: #imageLiteral(resourceName: "camera_pointer"))
+        didSelectImage(image: #imageLiteral(resourceName: "camera_pointer"), size:CGSize(width:50, height:50))
     }
 
     @IBAction func drawButtonTapped(_ sender: Any) {

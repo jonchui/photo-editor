@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     // returns whether saved correctly or not
     func saveImageDocumentDirectory(_ image: UIImage, path: String) -> Bool {
         let fileManager = FileManager.default
-        let imageData = UIImageJPEGRepresentation(image, 1.0)
+        let imageData = UIImageJPEGRepresentation(image, 0.6)
         return fileManager.createFile(atPath: path, contents: imageData, attributes: nil)
     }
 

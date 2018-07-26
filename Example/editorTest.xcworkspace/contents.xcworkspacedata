@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../Photo Editor/Photo Editor.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:editorTest.xcodeproj">
    </FileRef>
    <FileRef

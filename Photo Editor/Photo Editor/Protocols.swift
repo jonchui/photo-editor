@@ -38,8 +38,9 @@ protocol StickersViewControllerDelegate {
     func didSelectView(view: UIView)
     /**
      - Parameter image: selected Image from StickersViewController
+     - Parameter size: the size of the image
      */
-    func didSelectImage(image: UIImage)
+    func didSelectImage(image: UIImage, size: CGSize)
     /**
      StickersViewController did Disappear
      */

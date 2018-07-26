@@ -7,16 +7,31 @@
 //
 
 import UIKit
+import CoreGraphics
 
 extension UIView {
     /**
      Convert UIView to UIImage
      */
-    func toImage() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 0.0)
-        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)
-        let snapshotImageFromMyView = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return snapshotImageFromMyView!
+    func toImagePreservingOrignalResolution(originalImage: UIImage) -> UIImage {
+        return build(originalImage, workingView:self)!
+//        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 0.0)
+//        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)
+//        let snapshotImageFromMyView = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        return snapshotImageFromMyView!
+    }
+
+    // source: https://github.com/yackle/CLImageEditor/blob/master/OptionalImageTools/CLStickerTool/CLStickerTool.m#L179 in objective-c, converted to swift using Swiftify v1.0.6472 - https://objectivec2swift.com/
+    func build(_ originalImage: UIImage, workingView: UIView) -> UIImage? {
+
+        let scale = originalImage.size.width / workingView.bounds.width
+        let layer = workingView.layer
+
+        UIGraphicsBeginImageContextWithOptions(originalImage.size, false, originalImage.scale)
+        originalImage.draw(at: CGPoint.zero)
+        UIGraphicsGetCurrentContext()?.scaleBy(x: scale, y: scale)
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
 }

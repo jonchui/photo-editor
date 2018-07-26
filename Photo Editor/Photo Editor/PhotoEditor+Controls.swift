@@ -41,6 +41,18 @@ extension PhotoEditorViewController {
         addStickersViewController()
     }
 
+    @IBAction func addTextStickerTapped(_ sender: Any) {
+        textButtonTapped(sender)
+    }
+
+    @IBAction func addCircleStickerTapped(_ sender: Any) {
+        didSelectImage(image: #imageLiteral(resourceName: "camera_circle"), size:CGSize(width: 100, height: 100))
+    }
+
+    @IBAction func addArrowStickerTapped(_ sender: Any) {
+        didSelectImage(image: #imageLiteral(resourceName: "camera_pointer"), size:CGSize(width:50, height:50))
+    }
+
     @IBAction func drawButtonTapped(_ sender: Any) {
         isDrawing = true
         canvasImageView.isUserInteractionEnabled = false
@@ -82,11 +94,11 @@ extension PhotoEditorViewController {
     //MARK: Bottom Toolbar
     
     @IBAction func saveButtonTapped(_ sender: AnyObject) {
-        UIImageWriteToSavedPhotosAlbum(canvasView.toImage(),self, #selector(PhotoEditorViewController.image(_:withPotentialError:contextInfo:)), nil)
+        UIImageWriteToSavedPhotosAlbum(canvasView.toImagePreservingOrignalResolution(originalImage: image!),self, #selector(PhotoEditorViewController.image(_:withPotentialError:contextInfo:)), nil)
     }
     
     @IBAction func shareButtonTapped(_ sender: UIButton) {
-        let activity = UIActivityViewController(activityItems: [canvasView.toImage()], applicationActivities: nil)
+        let activity = UIActivityViewController(activityItems: [canvasView.toImagePreservingOrignalResolution(originalImage: image!)], applicationActivities: nil)
         present(activity, animated: true, completion: nil)
         
     }
@@ -101,7 +113,7 @@ extension PhotoEditorViewController {
     }
     
     @IBAction func continueButtonPressed(_ sender: Any) {
-        let img = self.canvasView.toImage()
+        let img = self.canvasView.toImagePreservingOrignalResolution(originalImage: image!)
         photoEditorDelegate?.doneEditing(image: img)
         self.dismiss(animated: true, completion: nil)
     }
@@ -131,7 +143,7 @@ extension PhotoEditorViewController {
             case .sticker:
                 stickerButton.isHidden = true
             case .text:
-                stickerButton.isHidden = true
+                textButton.isHidden = true
             }
         }
     }

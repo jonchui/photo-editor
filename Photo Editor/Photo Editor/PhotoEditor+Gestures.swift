@@ -22,14 +22,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate  {
             if view is UIImageView {
                 //Tap only on visible parts on the image
                 if recognizer.state == .began {
-                    for imageView in subImageViews(view: canvasImageView) {
-                        let location = recognizer.location(in: imageView)
-                        let alpha = imageView.alphaAtPoint(location)
-                        if alpha > 0 {
-                            imageViewToPan = imageView
-                            break
-                        }
-                    }
+                    imageViewToPan = view as! UIImageView
                 }
                 if imageViewToPan != nil {
                     moveView(view: imageViewToPan!, recognizer: recognizer)

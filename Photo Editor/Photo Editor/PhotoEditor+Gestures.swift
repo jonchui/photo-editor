@@ -17,11 +17,11 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      Selecting transparent parts of the imageview won't move the object
      */
     func panGesture(_ recognizer: UIPanGestureRecognizer) {
+        print("pan")
         if let view = recognizer.view {
             if view is UIImageView {
                 //Tap only on visible parts on the image
                 if recognizer.state == .began {
-                    setSelectedView(view)
                     imageViewToPan = view as! UIImageView
                 }
                 if imageViewToPan != nil {
@@ -34,6 +34,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
     }
 
     func setSelectedView(_ selectedView : UIView) {
+        print("setSelectedView: \(selectedView)")
         // If selectedView is currently selected, let's deselect
         if lastSelectedView == selectedView {
             lastSelectedView?.backgroundColor = UIColor.clear
@@ -94,6 +95,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      Will make scale scale Effect
      */
     func tapGesture(_ recognizer: UITapGestureRecognizer) {
+        print("tap")
         if let view = recognizer.view {
             scaleEffect(view: view)
             self.setSelectedView(view)
@@ -158,11 +160,14 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      */
 
     func moveView(view: UIView, recognizer: UIPanGestureRecognizer) {
-
+        print("move")
         hideToolbar(hide: true)
         deleteView.isHidden = false
 
-        self.setSelectedView(view)
+        if view != self.lastSelectedView {
+            // don't select it if it's already selected
+            self.setSelectedView(view)
+        }
 
         view.superview?.bringSubview(toFront: view)
         let pointToSuperView = recognizer.location(in: self.view)

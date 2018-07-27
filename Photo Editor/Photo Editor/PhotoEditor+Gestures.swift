@@ -38,6 +38,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         if lastSelectedView == selectedView {
             lastSelectedView?.backgroundColor = UIColor.clear
             self.lastSelectedView = nil
+            return
         }
             // otherwise deselect the view in preparation of selecting the new one
         else if let lastSelectedView = self.lastSelectedView {
@@ -91,21 +92,11 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
     /**
      UITapGestureRecognizer - Taping on Objects
      Will make scale scale Effect
-     Selecting transparent parts of the imageview won't move the object
      */
     func tapGesture(_ recognizer: UITapGestureRecognizer) {
         if let view = recognizer.view {
-            if view is UIImageView {
-                //Tap only on visible parts on the image
-                for imageView in subImageViews(view: canvasImageView) {
-                    scaleEffect(view: imageView)
-                    self.setSelectedView(view)
-                    break
-                }
-            } else {
-                scaleEffect(view: view)
-                self.setSelectedView(view)
-            }
+            scaleEffect(view: view)
+            self.setSelectedView(view)
         }
     }
 
@@ -141,6 +132,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      Scale Effect
      */
     func scaleEffect(view: UIView) {
+        print("scaling: \(view)")
         view.superview?.bringSubview(toFront: view)
 
         if #available(iOS 10.0, *) {
@@ -169,6 +161,8 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
 
         hideToolbar(hide: true)
         deleteView.isHidden = false
+
+        self.setSelectedView(view)
 
         view.superview?.bringSubview(toFront: view)
         let pointToSuperView = recognizer.location(in: self.view)

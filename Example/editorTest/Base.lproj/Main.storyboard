@@ -24,33 +24,46 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dgq-H0-4ZX">
                                 <rect key="frame" x="16" y="20" width="343" height="578"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="578" id="4yB-EE-XUd"/>
+                                </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vca-SA-ouA">
-                                <rect key="frame" x="211" y="610" width="109" height="37"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="22"/>
-                                <state key="normal" title="Pick Image"/>
-                                <connections>
-                                    <action selector="pickImageButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vn4-ox-Mta"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDx-1t-kLg">
-                                <rect key="frame" x="46" y="610" width="113" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="22"/>
-                                <state key="normal" title="sample img"/>
-                                <connections>
-                                    <action selector="sampleImageButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AqI-Uc-caU"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzB-X5-yh0">
+                                <rect key="frame" x="0.0" y="610" width="375" height="37"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDx-1t-kLg">
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="37"/>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="22"/>
+                                        <state key="normal" title="sample img"/>
+                                        <connections>
+                                            <action selector="sampleImageButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AqI-Uc-caU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vca-SA-ouA">
+                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="37"/>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="22"/>
+                                        <state key="normal" title="Pick Image"/>
+                                        <connections>
+                                            <action selector="pickImageButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vn4-ox-Mta"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="hZw-pf-bMD"/>
+                                    <constraint firstItem="Vca-SA-ouA" firstAttribute="width" secondItem="gDx-1t-kLg" secondAttribute="width" id="w9x-N1-MaO"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="kzB-X5-yh0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="CCo-Xk-vqD"/>
                             <constraint firstItem="dgq-H0-4ZX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Exd-Mo-T5c"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Vca-SA-ouA" secondAttribute="bottom" constant="12" id="KQ7-NG-HXi"/>
-                            <constraint firstItem="Vca-SA-ouA" firstAttribute="top" secondItem="dgq-H0-4ZX" secondAttribute="bottom" constant="20" id="RRT-Fc-EHq"/>
+                            <constraint firstAttribute="trailing" secondItem="kzB-X5-yh0" secondAttribute="trailing" id="H4o-QB-BGy"/>
+                            <constraint firstItem="kzB-X5-yh0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VU5-ZH-6Ws"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dgq-H0-4ZX" secondAttribute="trailing" id="bPV-c3-Rna"/>
-                            <constraint firstItem="Vca-SA-ouA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jee-cX-iEm"/>
+                            <constraint firstItem="kzB-X5-yh0" firstAttribute="top" secondItem="dgq-H0-4ZX" secondAttribute="bottom" constant="12" id="knv-EJ-cir"/>
                             <constraint firstItem="dgq-H0-4ZX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pyx-f2-KUn"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kzB-X5-yh0" secondAttribute="bottom" constant="20" id="tG5-RT-o9n"/>
                         </constraints>
                     </view>
                     <connections>

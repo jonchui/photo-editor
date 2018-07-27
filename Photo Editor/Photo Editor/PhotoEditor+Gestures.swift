@@ -56,7 +56,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
             lastSelectedView.backgroundColor = UIColor.clear
         }
         lastSelectedView = selectedView
-        selectedView.backgroundColor = UIColor.green
+        selectedView.backgroundColor = UIColor.yellow.withAlphaComponent(0.5)
     }
 
     func resizeTextViewToFitText(_ textView: UITextView) {
@@ -132,7 +132,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         }
         print("tap")
         if let view = recognizer.view {
-            if recognizer.state != .began {
+            if recognizer.state != .ended {
                 guard view == lastSelectedView else {
                     print("do not tap: user is not tapping another view")
                     return

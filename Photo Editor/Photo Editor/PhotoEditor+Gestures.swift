@@ -54,6 +54,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      If it's a UITextView will make the font bigger so it doen't look pixlated
      */
     func pinchGesture(_ recognizer: UIPinchGestureRecognizer) {
+        print("pinch")
         if let selectedView = self.lastSelectedView {
             if selectedView is UITextView {
                 let textView = selectedView as! UITextView
@@ -84,6 +85,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      UIRotationGestureRecognizer - Rotating Objects
      */
     func rotationGesture(_ recognizer: UIRotationGestureRecognizer) {
+        print("rotate")
         if let view = recognizer.view {
             view.transform = view.transform.rotated(by: recognizer.rotation)
             recognizer.rotation = 0

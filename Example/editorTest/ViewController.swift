@@ -16,7 +16,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    var firstTimeLoad = true
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if firstTimeLoad {
+            firstTimeLoad = false
+            self.showPhotoEditorWithImage(#imageLiteral(resourceName: "img.jpg"))
+        }
+    }
+
+    @IBAction func sampleImageButton(_ sender: Any) {
+        self.showPhotoEditorWithImage(#imageLiteral(resourceName: "img.jpg"))
+    }
     @IBAction func pickImageButtonTapped(_ sender: Any) {
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -54,18 +66,7 @@ extension ViewController: PhotoEditorDelegate {
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : Any]) {
-
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
-            picker.dismiss(animated: true, completion: nil)
-            return
-        }
-        picker.dismiss(animated: true, completion: nil)
-
-        let path = LocalDocumentsFolder.appendingPathComponent("originalimage.jpeg")
-        saveImageDocumentDirectory(image, path: path.absoluteString)
-
+    fileprivate func showPhotoEditorWithImage(_ image: UIImage) {
         let photoEditor = PhotoEditorViewController(nibName:"PhotoEditorViewController",bundle: Bundle(for: PhotoEditorViewController.self))
         photoEditor.photoEditorDelegate = self
         photoEditor.image = image
@@ -80,6 +81,21 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         photoEditor.hiddenControls = [.text, .crop, .draw, .share, .sticker]
 
         present(photoEditor, animated: true, completion: nil)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : Any]) {
+
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            picker.dismiss(animated: true, completion: nil)
+            return
+        }
+        picker.dismiss(animated: true, completion: nil)
+
+        let path = LocalDocumentsFolder.appendingPathComponent("originalimage.jpeg")
+        saveImageDocumentDirectory(image, path: path.absoluteString)
+
+        showPhotoEditorWithImage(image)
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

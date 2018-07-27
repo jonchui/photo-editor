@@ -21,6 +21,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
             if view is UIImageView {
                 //Tap only on visible parts on the image
                 if recognizer.state == .began {
+                    setSelectedView(view)
                     imageViewToPan = view as! UIImageView
                 }
                 if imageViewToPan != nil {
@@ -32,14 +33,28 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         }
     }
 
+    func setSelectedView(_ selectedView : UIView) {
+        // If selectedView is currently selected, let's deselect
+        if lastSelectedView == selectedView {
+            lastSelectedView?.backgroundColor = UIColor.clear
+            self.lastSelectedView = nil
+        }
+            // otherwise deselect the view in preparation of selecting the new one
+        else if let lastSelectedView = self.lastSelectedView {
+            lastSelectedView.backgroundColor = UIColor.clear
+        }
+        lastSelectedView = selectedView
+        selectedView.backgroundColor = UIColor.green
+    }
+
     /**
-     UIPinchGestureRecognizer - Pinching Objects
+     UIPinchGestureRecognizer - Pinches last selected view
      If it's a UITextView will make the font bigger so it doen't look pixlated
      */
     func pinchGesture(_ recognizer: UIPinchGestureRecognizer) {
-        if let view = recognizer.view {
-            if view is UITextView {
-                let textView = view as! UITextView
+        if let selectedView = self.lastSelectedView {
+            if selectedView is UITextView {
+                let textView = selectedView as! UITextView
 
                 if textView.font!.pointSize * recognizer.scale < 90 {
                     let font = UIFont(name: textView.font!.fontName, size: textView.font!.pointSize * recognizer.scale)
@@ -57,7 +72,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
 
                 textView.setNeedsDisplay()
             } else {
-                view.transform = view.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
+                selectedView.transform = selectedView.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
             }
             recognizer.scale = 1
         }
@@ -83,15 +98,13 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
             if view is UIImageView {
                 //Tap only on visible parts on the image
                 for imageView in subImageViews(view: canvasImageView) {
-                    let location = recognizer.location(in: imageView)
-                    let alpha = imageView.alphaAtPoint(location)
-                    if alpha > 0 {
-                        scaleEffect(view: imageView)
-                        break
-                    }
+                    scaleEffect(view: imageView)
+                    self.setSelectedView(view)
+                    break
                 }
             } else {
                 scaleEffect(view: view)
+                self.setSelectedView(view)
             }
         }
     }

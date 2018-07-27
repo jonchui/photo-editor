@@ -69,6 +69,9 @@ public final class PhotoEditorViewController: UIViewController {
     var imageViewToPan: UIImageView?
     var isTyping: Bool = false
 
+    // Adding the notion of a most recently selected view. Whatever view was last interacted with (zoomed, scaled, touched, moved, etc.) will be marked the last selected view. That way, if we pinch the entire screen it will only zoom the last. If nothing has been selected, or the `lastSelectedView` was tapped again, this will be nil.
+    var lastSelectedView: UIView?
+
     var stickersViewController: StickersViewController!
 
     //Register Custom font before we load XIB
@@ -101,6 +104,12 @@ public final class PhotoEditorViewController: UIViewController {
         configureCollectionView()
         stickersViewController = StickersViewController(nibName: "StickersViewController", bundle: Bundle(for: StickersViewController.self))
         hideControls()
+
+        // add global pinch gesture
+        let pinchGesture = UIPinchGestureRecognizer(target: self,
+                                                    action: #selector(PhotoEditorViewController.pinchGesture))
+        pinchGesture.delegate = self
+        self.view.addGestureRecognizer(pinchGesture)
     }
 
     func configureCollectionView() {

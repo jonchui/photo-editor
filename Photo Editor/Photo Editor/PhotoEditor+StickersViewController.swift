@@ -65,11 +65,12 @@ extension PhotoEditorViewController: StickersViewControllerDelegate {
         imageView.contentMode = .scaleAspectFit
         imageView.frame.size = size
         imageView.center = canvasImageView.center
-//        imageView.backgroundColor = UIColor.green
 
         self.canvasImageView.addSubview(imageView)
         //Gestures
         addGestures(view: imageView)
+
+        setSelectedView(imageView)
     }
 
     func stickersViewDidDisappear() {
@@ -89,11 +90,6 @@ extension PhotoEditorViewController: StickersViewControllerDelegate {
         panGesture.maximumNumberOfTouches = 1
         panGesture.delegate = self
         view.addGestureRecognizer(panGesture)
-
-        let pinchGesture = UIPinchGestureRecognizer(target: self,
-                                                    action: #selector(PhotoEditorViewController.pinchGesture))
-        pinchGesture.delegate = self
-        view.addGestureRecognizer(pinchGesture)
 
         let rotationGestureRecognizer = UIRotationGestureRecognizer(target: self,
                                                                     action:#selector(PhotoEditorViewController.rotationGesture) )

@@ -17,8 +17,18 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      Selecting transparent parts of the imageview won't move the object
      */
     func panGesture(_ recognizer: UIPanGestureRecognizer) {
+        guard !userIsPinching else {
+            print("do not pan: user is pinching")
+            return
+        }
         print("pan")
         if let view = recognizer.view {
+            if recognizer.state != .began {
+                guard view == lastSelectedView else {
+                    print("do not pan: user is panning another view")
+                    return
+                }
+            }
             if view is UIImageView {
                 //Tap only on visible parts on the image
                 if recognizer.state == .began {
@@ -49,12 +59,29 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         selectedView.backgroundColor = UIColor.green
     }
 
+    func resizeTextViewToFitText(_ textView: UITextView) {
+        let sizeToFit = textView.sizeThatFits(CGSize(width: UIScreen.main.bounds.size.width,
+                                                     height:CGFloat.greatestFiniteMagnitude))
+        textView.bounds.size = CGSize(width: textView.intrinsicContentSize.width,
+                                      height: sizeToFit.height)
+    }
+
     /**
      UIPinchGestureRecognizer - Pinches last selected view
      If it's a UITextView will make the font bigger so it doen't look pixlated
      */
     func pinchGesture(_ recognizer: UIPinchGestureRecognizer) {
         print("pinch")
+        switch recognizer.state {
+        case .possible, .changed:
+            // do nothing
+            userIsPinching = true
+        case .ended, .cancelled, .failed:
+            userIsPinching = false
+        case .began:
+            userIsPinching = true
+        }
+
         if let selectedView = self.lastSelectedView {
             if selectedView is UITextView {
                 let textView = selectedView as! UITextView
@@ -62,10 +89,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
                 if textView.font!.pointSize * recognizer.scale < 90 {
                     let font = UIFont(name: textView.font!.fontName, size: textView.font!.pointSize * recognizer.scale)
                     textView.font = font
-                    let sizeToFit = textView.sizeThatFits(CGSize(width: UIScreen.main.bounds.size.width,
-                                                                 height:CGFloat.greatestFiniteMagnitude))
-                    textView.bounds.size = CGSize(width: textView.intrinsicContentSize.width,
-                                                  height: sizeToFit.height)
+                    resizeTextViewToFitText(textView)
                 } else {
                     let sizeToFit = textView.sizeThatFits(CGSize(width: UIScreen.main.bounds.size.width,
                                                                  height:CGFloat.greatestFiniteMagnitude))
@@ -85,8 +109,13 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      UIRotationGestureRecognizer - Rotating Objects
      */
     func rotationGesture(_ recognizer: UIRotationGestureRecognizer) {
+        // cannot guard against this, b/c it can happen when we zoom
         print("rotate")
         if let view = recognizer.view {
+            guard view == lastSelectedView else {
+                print("do not rotate: user is rotating another view")
+                return
+            }
             view.transform = view.transform.rotated(by: recognizer.rotation)
             recognizer.rotation = 0
         }
@@ -97,8 +126,18 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      Will make scale scale Effect
      */
     func tapGesture(_ recognizer: UITapGestureRecognizer) {
+        guard !userIsPinching else {
+            print("do not tap: user is pinching")
+            return
+        }
         print("tap")
         if let view = recognizer.view {
+            if recognizer.state != .began {
+                guard view == lastSelectedView else {
+                    print("do not tap: user is not tapping another view")
+                    return
+                }
+            }
             scaleEffect(view: view)
             self.setSelectedView(view)
         }

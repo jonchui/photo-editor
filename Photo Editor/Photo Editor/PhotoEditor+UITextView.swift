@@ -49,6 +49,7 @@ extension PhotoEditorViewController: UITextViewDelegate {
                         textView.transform = self.lastTextViewTransform!
                         textView.center = self.lastTextViewTransCenter!
         }, completion: nil)
+        resizeTextViewToFitText(textView)
     }
 
 }

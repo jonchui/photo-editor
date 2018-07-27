@@ -72,6 +72,9 @@ public final class PhotoEditorViewController: UIViewController {
     // Adding the notion of a most recently selected view. Whatever view was last interacted with (zoomed, scaled, touched, moved, etc.) will be marked the last selected view. That way, if we pinch the entire screen it will only zoom the last. If nothing has been selected, or the `lastSelectedView` was tapped again, this will be nil.
     var lastSelectedView: UIView?
 
+    // tracks whether user is pinching the entire screen - used to zoom whatever lastSelectedView is
+    var userIsPinching: Bool = false
+
     var stickersViewController: StickersViewController!
 
     //Register Custom font before we load XIB

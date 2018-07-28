@@ -19,6 +19,7 @@ extension PhotoEditorViewController: UITextViewDelegate {
             textView.frame.size = CGSize(width: oldFrame.width, height: sizeToFit.height)
         }
     }
+
     public func textViewDidBeginEditing(_ textView: UITextView) {
         isTyping = true
         lastTextViewTransform =  textView.transform
@@ -50,6 +51,15 @@ extension PhotoEditorViewController: UITextViewDelegate {
                         textView.center = self.lastTextViewTransCenter!
         }, completion: nil)
         resizeTextViewToFitText(textView)
+    }
+
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n") {
+            textView.resignFirstResponder()
+            doneButtonTapped(textView)
+            return false
+        }
+        return true
     }
 
 }

@@ -73,7 +73,7 @@ public final class PhotoEditorViewController: UIViewController {
     var lastSelectedView: UIView?
 
     // tracks whether user is pinching the entire screen - used to zoom whatever lastSelectedView is
-    var userIsPinching: Bool = false
+    var userIsPinchingOrRotatingEntireScreen: Bool = false
 
     var stickersViewController: StickersViewController!
 
@@ -113,6 +113,12 @@ public final class PhotoEditorViewController: UIViewController {
                                                     action: #selector(PhotoEditorViewController.pinchGesture))
         pinchGesture.delegate = self
         self.view.addGestureRecognizer(pinchGesture)
+
+        // add global rotate gesture
+        let rotationGestureRecognizer = UIRotationGestureRecognizer(target: self,
+                                                                    action:#selector(PhotoEditorViewController.rotationGesture) )
+        rotationGestureRecognizer.delegate = self
+        self.view.addGestureRecognizer(rotationGestureRecognizer)
     }
 
     func configureCollectionView() {

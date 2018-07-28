@@ -94,11 +94,20 @@ extension PhotoEditorViewController {
 
     // MARK: Bottom Toolbar
 
+    fileprivate func cleanupBeforeSavingImage() {
+        // this should untoggle toggle
+        if lastSelectedView != nil {
+            self.setSelectedView(lastSelectedView!)
+        }
+    }
+
     @IBAction func saveButtonTapped(_ sender: AnyObject) {
+        cleanupBeforeSavingImage()
         UIImageWriteToSavedPhotosAlbum(canvasView.toImagePreservingOrignalResolution(originalImage: image!),self, #selector(PhotoEditorViewController.image(_:withPotentialError:contextInfo:)), nil)
     }
 
     @IBAction func shareButtonTapped(_ sender: UIButton) {
+        cleanupBeforeSavingImage()
         let activity = UIActivityViewController(activityItems: [canvasView.toImagePreservingOrignalResolution(originalImage: image!)], applicationActivities: nil)
         present(activity, animated: true, completion: nil)
 
@@ -114,6 +123,9 @@ extension PhotoEditorViewController {
     }
 
     @IBAction func continueButtonPressed(_ sender: Any) {
+        // unhlight the selected view, otherwise will be in the saved image
+        cleanupBeforeSavingImage()
+
         let img = self.canvasView.toImagePreservingOrignalResolution(originalImage: image!)
         photoEditorDelegate?.doneEditing(image: img)
         self.dismiss(animated: true, completion: nil)

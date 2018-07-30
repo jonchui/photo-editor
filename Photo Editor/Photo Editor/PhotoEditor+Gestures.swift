@@ -29,17 +29,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
                     return
                 }
             }
-            if view is UIImageView {
-                //Tap only on visible parts on the image
-                if recognizer.state == .began {
-                    imageViewToPan = view as! UIImageView
-                }
-                if imageViewToPan != nil {
-                    moveView(view: imageViewToPan!, recognizer: recognizer)
-                }
-            } else {
-                moveView(view: view, recognizer: recognizer)
-            }
+            moveView(view: view, recognizer: recognizer)
         }
     }
 
@@ -83,8 +73,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
     func resizeTextViewToFitText(_ textView: UITextView) {
         let sizeToFit = textView.sizeThatFits(CGSize(width: UIScreen.main.bounds.size.width,
                                                      height:CGFloat.greatestFiniteMagnitude))
-        textView.bounds.size = CGSize(width: textView.intrinsicContentSize.width,
-                                      height: sizeToFit.height)
+        textView.bounds.size = sizeToFit
     }
 
     fileprivate func setGlobalStateForPinchingORRotating(_ state: UIGestureRecognizerState) {

@@ -123,7 +123,7 @@ extension PhotoEditorViewController {
     }
 
     @IBAction func continueButtonPressed(_ sender: Any) {
-        // unhlight the selected view, otherwise will be in the saved image
+        // unhighlight the selected view, otherwise will be in the saved image
         cleanupBeforeSavingImage()
 
         let img = self.canvasView.toImagePreservingOrignalResolution(originalImage: image!)

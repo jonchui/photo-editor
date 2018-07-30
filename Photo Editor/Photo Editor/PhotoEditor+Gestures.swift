@@ -43,20 +43,41 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         }
     }
 
+    // Highlights current view visually (yellow see-through background, red border, and shadow) so that any
+    // pinching/rotating on entire image affects only that view.
+    // If you call this on the currently selected View again, it simply deselects it
     func setSelectedView(_ selectedView : UIView) {
         print("setSelectedView: \(selectedView)")
-        // If selectedView is currently selected, let's deselect
+
+        // If selectedView is currently selected, let's deselect & early return. There's nothing left to do
         if lastSelectedView == selectedView {
-            lastSelectedView?.backgroundColor = UIColor.clear
+            unHighlightView(selectedView)
             self.lastSelectedView = nil
             return
         }
-            // otherwise deselect the view in preparation of selecting the new one
-        else if let lastSelectedView = self.lastSelectedView {
-            lastSelectedView.backgroundColor = UIColor.clear
+
+        // Deselect the lastSelectedView in preparation of selecting the new one
+        if let lastSelectedView = self.lastSelectedView {
+            unHighlightView(lastSelectedView)
         }
         lastSelectedView = selectedView
-        selectedView.backgroundColor = UIColor.yellow.withAlphaComponent(0.5)
+        highlightView(selectedView)
+    }
+
+    // Adds yellow see-through background, red border, and shadow to `view`
+    private func highlightView(_ view : UIView) {
+        view.backgroundColor = UIColor.yellow.withAlphaComponent(0.5)
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.red.withAlphaComponent(0.5).cgColor
+        view.layer.shadowOpacity = 0.7
+        view.layer.shadowRadius = 10.0
+    }
+
+    // Removes shadow & background color and border from `view`
+    private func unHighlightView(_ view : UIView) {
+        view.backgroundColor = UIColor.clear
+        view.layer.shadowOpacity = 0.0
+        view.layer.borderWidth = 0
     }
 
     func resizeTextViewToFitText(_ textView: UITextView) {

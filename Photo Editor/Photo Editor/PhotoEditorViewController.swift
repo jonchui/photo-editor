@@ -55,6 +55,22 @@ public final class PhotoEditorViewController: UIViewController {
     // list of controls to be hidden
     public var hiddenControls : [control] = []
 
+    #if DEBUG
+    // Just for testing unlimited photos
+    public var automaticallySavePhoto = false
+
+    override public func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if (automaticallySavePhoto) {
+            continueButtonPressed(doneButton)
+        }
+    }
+
+    deinit {
+        print("PhotoEditorVC deinit")
+    }
+    #endif
+
     var stickersVCIsVisible = false
     var drawColor: UIColor = UIColor.black
     var textColor: UIColor = UIColor.white

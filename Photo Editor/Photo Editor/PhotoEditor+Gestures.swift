@@ -18,14 +18,20 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      */
     func panGesture(_ recognizer: UIPanGestureRecognizer) {
         guard !userIsPinchingOrRotatingEntireScreen else {
-            print("do not pan: user is pinching")
+            if logExtraDebug {
+                print("do not pan: user is pinching")
+            }
             return
         }
-        print("pan")
+        if logExtraDebug {
+            print("pan")
+        }
         if let view = recognizer.view {
             if recognizer.state != .began {
                 guard view == lastSelectedView else {
-                    print("do not pan: user is panning another view")
+                    if logExtraDebug {
+                        print("do not pan: user is panning another view")
+                    }
                     return
                 }
             }
@@ -37,7 +43,9 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
     // pinching/rotating on entire image affects only that view.
     // If you call this on the currently selected View again, it simply deselects it
     func setSelectedView(_ selectedView : UIView) {
-        print("setSelectedView: \(selectedView)")
+        if logExtraDebug {
+            print("setSelectedView: \(selectedView)")
+        }
 
         // If selectedView is currently selected, let's deselect & early return. There's nothing left to do
         if lastSelectedView == selectedView {
@@ -93,7 +101,9 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      If it's a UITextView will make the font bigger so it doen't look pixlated
      */
     func pinchGesture(_ recognizer: UIPinchGestureRecognizer) {
-        print("pinch")
+        if logExtraDebug {
+            print("pinch")
+        }
         setGlobalStateForPinchingORRotating(recognizer.state)
 
         if let selectedView = self.lastSelectedView {
@@ -126,7 +136,9 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         setGlobalStateForPinchingORRotating(recognizer.state)
 
         // cannot guard against this, b/c it can happen when we zoom
-        print("rotate")
+        if logExtraDebug {
+            print("rotate")
+        }
         if let selectedView = self.lastSelectedView {
             selectedView.transform = selectedView.transform.rotated(by: recognizer.rotation)
             recognizer.rotation = 0
@@ -139,14 +151,18 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      */
     func tapGesture(_ recognizer: UITapGestureRecognizer) {
         guard !userIsPinchingOrRotatingEntireScreen else {
-            print("do not tap: user is pinching")
+            if logExtraDebug {
+                print("do not tap: user is pinching")
+            }
             return
         }
         print("tap")
         if let view = recognizer.view {
             if recognizer.state != .ended {
                 guard view == lastSelectedView else {
-                    print("do not tap: user is not tapping another view")
+                    if logExtraDebug {
+                        print("do not tap: user is not tapping another view")
+                    }
                     return
                 }
             }
@@ -187,7 +203,9 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      Scale Effect
      */
     func scaleEffect(view: UIView) {
-        print("scaling: \(view)")
+        if logExtraDebug {
+            print("scaling: \(view)")
+        }
         view.superview?.bringSubview(toFront: view)
 
         if #available(iOS 10.0, *) {
@@ -213,7 +231,9 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      */
 
     func moveView(view: UIView, recognizer: UIPanGestureRecognizer) {
-        print("move")
+        if logExtraDebug {
+            print("move")
+        }
         hideToolbar(hide: true)
         deleteView.isHidden = false
 

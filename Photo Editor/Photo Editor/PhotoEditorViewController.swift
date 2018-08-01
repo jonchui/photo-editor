@@ -69,6 +69,9 @@ public final class PhotoEditorViewController: UIViewController {
     deinit {
         print("PhotoEditorVC deinit")
     }
+    public var logExtraDebug = true
+    #else
+    public var logExtraDebug = false
     #endif
 
     var stickersVCIsVisible = false

@@ -22,12 +22,12 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         if firstTimeLoad {
             firstTimeLoad = false
-            self.showPhotoEditorWithImage(#imageLiteral(resourceName: "img.jpg"))
+            self.showPhotoEditorWithImage(#imageLiteral(resourceName: "fullsizeimage.png"))
         }
     }
 
     @IBAction func sampleImageButton(_ sender: Any) {
-        self.showPhotoEditorWithImage(#imageLiteral(resourceName: "img.jpg"))
+        self.showPhotoEditorWithImage(#imageLiteral(resourceName: "fullsizeimage.png"))
     }
     @IBAction func pickImageButtonTapped(_ sender: Any) {
         let picker = UIImagePickerController()

@@ -33,6 +33,7 @@
 		96498EFD61F554264992AD7531BB86AA /* PhotoEditor+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030319F9249163A3D6E8438BD6632675 /* PhotoEditor+Gestures.swift */; };
 		A5CC5BE134A6EE6F7A002E8FFEE7D634 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
 		A6F124D772CBB0917329034E436D8BA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
+		A77F3ABD2114131A0008FED6 /* PassThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77F3ABC2114131A0008FED6 /* PassThroughView.swift */; };
 		AB9C1A71DDCE200C76EF003CAD6D6B00 /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A259FABED5B036C0E6FB025253683F /* PhotoEditorViewController.swift */; };
 		B3DD8332729E151E4C5133733C04FD7B /* ColorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D50A7FF3967881DF4CAE447197FAA29 /* ColorCollectionViewCell.xib */; };
 		B6C1EC16D871B4B1E4469E2591E3B156 /* PhotoEditor+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1215FEFE7EEC3FE07B28C0DE7C16DE21 /* PhotoEditor+Keyboard.swift */; };
@@ -64,7 +65,7 @@
 
 /* Begin PBXFileReference section */
 		030319F9249163A3D6E8438BD6632675 /* PhotoEditor+Gestures.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "PhotoEditor+Gestures.swift"; path = "Photo Editor/Photo Editor/PhotoEditor+Gestures.swift"; sourceTree = "<group>"; };
-		03F1570CCB15F2E05EC0AF19AC5733E4 /* iOSPhotoEditor.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = iOSPhotoEditor.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		03F1570CCB15F2E05EC0AF19AC5733E4 /* iOSPhotoEditor.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = iOSPhotoEditor.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0466B0E68F5CDFA5AE27666412A9EF57 /* StickerCollectionViewCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = StickerCollectionViewCell.xib; path = "Photo Editor/Photo Editor/StickerCollectionViewCell.xib"; sourceTree = "<group>"; };
 		0B12701BA5AA6B2D7B4493777FC16AB3 /* iOSPhotoEditor-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "iOSPhotoEditor-umbrella.h"; sourceTree = "<group>"; };
 		0BFFB0554462CC901FC90566045BB32A /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Photo Editor/Photo Editor/Assets.xcassets"; sourceTree = "<group>"; };
@@ -86,12 +87,12 @@
 		3E1C04E859107F8FAF538A3C70D6C223 /* PhotoCropEditorBorder.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = PhotoCropEditorBorder.png; path = "Photo Editor/Photo Editor/PhotoCropEditorBorder.png"; sourceTree = "<group>"; };
 		3F8A8222AE2D96760B9C29B04407321C /* Pods-editorTest-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-editorTest-frameworks.sh"; sourceTree = "<group>"; };
 		40585F4861800D3138AF3385486275EB /* StickerCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StickerCollectionViewCell.swift; path = "Photo Editor/Photo Editor/StickerCollectionViewCell.swift"; sourceTree = "<group>"; };
-		4488668BC0CBB85D6E9385FEF33D471F /* LICENSE.md */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.md; sourceTree = "<group>"; };
+		4488668BC0CBB85D6E9385FEF33D471F /* LICENSE.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		47A2CFB12295B7624468292C91347784 /* CropViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CropViewController.swift; path = "Photo Editor/Photo Editor/CropViewController.swift"; sourceTree = "<group>"; };
 		48297680D0BF29DEF52741A7FAB0C892 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Photo Editor/Photo Editor/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		4E8BF47BD8840D2F28AD712392F78279 /* UIImageView+Alpha.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImageView+Alpha.swift"; path = "Photo Editor/Photo Editor/UIImageView+Alpha.swift"; sourceTree = "<group>"; };
 		4FF63DCEB25A1CF2307A465069B24E8D /* Pods-editorTest.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-editorTest.modulemap"; sourceTree = "<group>"; };
-		59AFCAAD55A8A5963F25482DA448916A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		59AFCAAD55A8A5963F25482DA448916A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		5D50A7FF3967881DF4CAE447197FAA29 /* ColorCollectionViewCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = ColorCollectionViewCell.xib; path = "Photo Editor/Photo Editor/ColorCollectionViewCell.xib"; sourceTree = "<group>"; };
 		5D926DF790FFB10A8AC1F5BF4C3077A0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,15 +106,16 @@
 		80BA066C1366886B62CE56F38734A733 /* PhotoEditorViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = PhotoEditorViewController.xib; path = "Photo Editor/Photo Editor/PhotoEditorViewController.xib"; sourceTree = "<group>"; };
 		88BF7BB7B303AD2C81A1CF46D25820EE /* iOSPhotoEditor.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = iOSPhotoEditor.modulemap; sourceTree = "<group>"; };
 		88C3CA44E1C8F9359C95E3B6D6C8FAEC /* PhotoEditor+UITextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "PhotoEditor+UITextView.swift"; path = "Photo Editor/Photo Editor/PhotoEditor+UITextView.swift"; sourceTree = "<group>"; };
-		89685FE27BF9311998BC7D213657B453 /* icomoon.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = icomoon.ttf; path = "Photo Editor/Photo Editor/icomoon.ttf"; sourceTree = "<group>"; };
+		89685FE27BF9311998BC7D213657B453 /* icomoon.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = icomoon.ttf; path = "Photo Editor/Photo Editor/icomoon.ttf"; sourceTree = "<group>"; };
 		931E0499C5B72A4F5933F740B47B0C9C /* CropRectView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CropRectView.swift; path = "Photo Editor/Photo Editor/CropRectView.swift"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		960A4072FD7C03AEAFC4E9141157FED0 /* Pods_editorTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_editorTest.framework; path = "Pods-editorTest.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		960A4072FD7C03AEAFC4E9141157FED0 /* Pods_editorTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_editorTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99001B52EE88FB1CC0E1BF1866DAB4F3 /* Pods-editorTest-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-editorTest-umbrella.h"; sourceTree = "<group>"; };
 		998C34760137A66954009F1D1B204CA8 /* ColorsCollectionViewDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ColorsCollectionViewDelegate.swift; path = "Photo Editor/Photo Editor/ColorsCollectionViewDelegate.swift"; sourceTree = "<group>"; };
 		9B870B886A2050A75BD1D82738671241 /* ResizeControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResizeControl.swift; path = "Photo Editor/Photo Editor/ResizeControl.swift"; sourceTree = "<group>"; };
 		9C75C6D65B91B13F06352D8E18FBA14A /* PhotoEditor+Drawing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "PhotoEditor+Drawing.swift"; path = "Photo Editor/Photo Editor/PhotoEditor+Drawing.swift"; sourceTree = "<group>"; };
 		A35536973CE01C03DAA4250669AF06A4 /* Pods-editorTest-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-editorTest-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A77F3ABC2114131A0008FED6 /* PassThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PassThroughView.swift; path = "Photo Editor/Photo Editor/PassThroughView.swift"; sourceTree = "<group>"; };
 		B57F58AAAFF63B62CB08C845A7A90F4D /* iOSPhotoEditor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = iOSPhotoEditor.xcconfig; sourceTree = "<group>"; };
 		CDBE5020E9CDC4C8FE5FF1A99C810395 /* PhotoCropEditorBorder@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "PhotoCropEditorBorder@3x.png"; path = "Photo Editor/Photo Editor/PhotoCropEditorBorder@3x.png"; sourceTree = "<group>"; };
 		CEA164A519D713148979AA3BE40BBAAC /* Pods-editorTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-editorTest.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,7 +123,7 @@
 		E10E88175955272A42CCCDF7F510CDAB /* Pods-editorTest-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-editorTest-resources.sh"; sourceTree = "<group>"; };
 		E36A458A83F898E48BE659C2230F607B /* PhotoEditor+Crop.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "PhotoEditor+Crop.swift"; path = "Photo Editor/Photo Editor/PhotoEditor+Crop.swift"; sourceTree = "<group>"; };
 		E6016BFC00C92F389CDBF8E90F927AE0 /* Protocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Protocols.swift; path = "Photo Editor/Photo Editor/Protocols.swift"; sourceTree = "<group>"; };
-		F1014E3114B89B09213778F1AFA8DE20 /* iOSPhotoEditor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = iOSPhotoEditor.framework; path = iOSPhotoEditor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1014E3114B89B09213778F1AFA8DE20 /* iOSPhotoEditor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSPhotoEditor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F79E962003EE39A0419C47774349ECB9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -223,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				3CB4A7C72815C7A37E6BE81E5272476A /* ColorCollectionViewCell.swift */,
+				A77F3ABC2114131A0008FED6 /* PassThroughView.swift */,
 				998C34760137A66954009F1D1B204CA8 /* ColorsCollectionViewDelegate.swift */,
 				931E0499C5B72A4F5933F740B47B0C9C /* CropRectView.swift */,
 				D4D5BB382D4B57EC8056139927F6D0E3 /* CropView.swift */,
@@ -417,6 +420,7 @@
 				CA2956153C7B870E7DB369B53E7276F2 /* ColorCollectionViewCell.swift in Sources */,
 				8FDC88E4EEBCDA3ED2A32ADD2665E686 /* ColorsCollectionViewDelegate.swift in Sources */,
 				C0EC73DEDCCD7F8AC686363A84D84DB2 /* CropRectView.swift in Sources */,
+				A77F3ABD2114131A0008FED6 /* PassThroughView.swift in Sources */,
 				705B68667A66F4651C605836E19BF955 /* CropView.swift in Sources */,
 				4C19D04FC1FE15A71C478FE09F26AD27 /* CropViewController.swift in Sources */,
 				16DE4E25F3A46896AD351CE10408AB84 /* EmojiCollectionViewCell.swift in Sources */,

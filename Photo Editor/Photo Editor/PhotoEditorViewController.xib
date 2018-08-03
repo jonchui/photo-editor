@@ -78,7 +78,7 @@
                         <constraint firstAttribute="height" constant="60" id="SZk-dl-fAI"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3MS-N5-3xY">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3MS-N5-3xY" customClass="PassThroughView" customModule="iOSPhotoEditor" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Doi-2Z-r5q">
@@ -211,7 +211,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="gradientFromtop" value="NO"/>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="87h-1G-t5q">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="87h-1G-t5q" customClass="PassThroughView" customModule="iOSPhotoEditor" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                     <subviews>
                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ZRl-89-gRO">
@@ -294,7 +294,7 @@
                     <rect key="frame" x="162" y="605" width="50" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqh-uS-U1m">
-                            <rect key="frame" x="10" y="10" width="31" height="30"/>
+                            <rect key="frame" x="9.5" y="10" width="31" height="30"/>
                             <fontDescription key="fontDescription" name="icomoon" family="icomoon" pointSize="30"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>

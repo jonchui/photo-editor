@@ -11,13 +11,7 @@ import UIKit
 
 // MARK: - Control
 public enum control {
-    case crop
-    case sticker
-    case draw
     case text
-    case save
-    case share
-    case clear
 }
 
 extension PhotoEditorViewController {
@@ -27,18 +21,6 @@ extension PhotoEditorViewController {
     @IBAction func cancelButtonTapped(_ sender: Any) {
         photoEditorDelegate?.canceledEditing()
         self.dismiss(animated: true, completion: nil)
-    }
-
-    @IBAction func cropButtonTapped(_ sender: UIButton) {
-        let controller = CropViewController()
-        controller.delegate = self
-        controller.image = image
-        let navController = UINavigationController(rootViewController: controller)
-        present(navController, animated: true, completion: nil)
-    }
-
-    @IBAction func stickersButtonTapped(_ sender: Any) {
-        addStickersViewController()
     }
 
     @IBAction func addTextStickerTapped(_ sender: Any) {
@@ -101,27 +83,6 @@ extension PhotoEditorViewController {
         }
     }
 
-    @IBAction func saveButtonTapped(_ sender: AnyObject) {
-        cleanupBeforeSavingImage()
-        UIImageWriteToSavedPhotosAlbum(canvasView.toImagePreservingOrignalResolution(originalImage: image!),self, #selector(PhotoEditorViewController.image(_:withPotentialError:contextInfo:)), nil)
-    }
-
-    @IBAction func shareButtonTapped(_ sender: UIButton) {
-        cleanupBeforeSavingImage()
-        let activity = UIActivityViewController(activityItems: [canvasView.toImagePreservingOrignalResolution(originalImage: image!)], applicationActivities: nil)
-        present(activity, animated: true, completion: nil)
-
-    }
-
-    @IBAction func clearButtonTapped(_ sender: AnyObject) {
-        //clear drawing
-        canvasImageView.image = nil
-        //clear stickers and textviews
-        for subview in canvasImageView.subviews {
-            subview.removeFromSuperview()
-        }
-    }
-
     @IBAction func continueButtonPressed(_ sender: Any) {
         // unhighlight the selected view, otherwise will be in the saved image
         cleanupBeforeSavingImage()
@@ -142,19 +103,6 @@ extension PhotoEditorViewController {
     func hideControls() {
         for control in hiddenControls {
             switch control {
-
-            case .clear:
-                clearButton.isHidden = true
-            case .crop:
-                cropButton.isHidden = true
-            case .draw:
-                drawButton.isHidden = true
-            case .save:
-                saveButton.isHidden = true
-            case .share:
-                shareButton.isHidden = true
-            case .sticker:
-                stickerButton.isHidden = true
             case .text:
                 textButton.isHidden = true
             }

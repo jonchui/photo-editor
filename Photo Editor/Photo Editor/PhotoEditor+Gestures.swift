@@ -255,39 +255,13 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         }
 
         view.superview?.bringSubview(toFront: view)
-        let pointToSuperView = recognizer.location(in: self.view)
-
         view.center = CGPoint(x: view.center.x + recognizer.translation(in: canvasImageView).x,
                               y: view.center.y + recognizer.translation(in: canvasImageView).y)
 
         recognizer.setTranslation(CGPoint.zero, in: canvasImageView)
 
-        if let previousPoint = lastPanPoint {
-            //View is going into deleteView
-            if deleteView.frame.contains(pointToSuperView) && !deleteView.frame.contains(previousPoint) {
-                if #available(iOS 10.0, *) {
-                    let generator = UIImpactFeedbackGenerator(style: .heavy)
-                    generator.impactOccurred()
-                }
-                UIView.animate(withDuration: 0.3, animations: {
-                    view.transform = view.transform.scaledBy(x: 0.25, y: 0.25)
-                    view.center = recognizer.location(in: self.canvasImageView)
-                })
-            }
-                //View is going out of deleteView
-            else if deleteView.frame.contains(previousPoint) && !deleteView.frame.contains(pointToSuperView) {
-                //Scale to original Size
-                UIView.animate(withDuration: 0.3, animations: {
-                    view.transform = view.transform.scaledBy(x: 4, y: 4)
-                    view.center = recognizer.location(in: self.canvasImageView)
-                })
-            }
-        }
-        lastPanPoint = pointToSuperView
-
         if recognizer.state == .ended {
             imageViewToPan = nil
-            lastPanPoint = nil
             var isInTextEditMode = false
             for v in self.canvasImageView.subviews {
                 if v.isFirstResponder && v is UITextView {

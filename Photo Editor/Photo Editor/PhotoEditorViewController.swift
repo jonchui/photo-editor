@@ -30,7 +30,6 @@ public final class PhotoEditorViewController: UIViewController {
     @IBOutlet weak var colorPickerView: UIView!
     @IBOutlet weak var colorPickerViewBottomConstraint: NSLayoutConstraint!
 
-
     public var image: UIImage?
     /**
      Array of Stickers -UIImage- that the user will choose from

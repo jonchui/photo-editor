@@ -23,10 +23,6 @@ extension PhotoEditorViewController {
         self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func addTextStickerTapped(_ sender: Any) {
-        textButtonTapped(sender)
-    }
-
     @IBAction func addCircleStickerTapped(_ sender: Any) {
         didSelectImage(image: #imageLiteral(resourceName: "camera_circle"), size:CGSize(width: 100, height: 100))
     }
@@ -35,15 +31,7 @@ extension PhotoEditorViewController {
         didSelectImage(image: #imageLiteral(resourceName: "camera_pointer"), size:CGSize(width:50, height:50))
     }
 
-    @IBAction func drawButtonTapped(_ sender: Any) {
-        isDrawing = true
-        canvasImageView.isUserInteractionEnabled = false
-        doneButton.isHidden = false
-        colorPickerView.isHidden = false
-        hideToolbar(hide: true)
-    }
-
-    @IBAction func textButtonTapped(_ sender: Any) {
+    @IBAction func addTextStickerTapped(_ sender: Any) {
         isTyping = true
         let textView = UITextView(frame: CGRect(x: 0, y: canvasImageView.center.y,
                                                 width: UIScreen.main.bounds.width, height: 30))
@@ -76,6 +64,13 @@ extension PhotoEditorViewController {
 
     // MARK: Bottom Toolbar
 
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        if let lastSelectedView = self.lastSelectedView {
+            lastSelectedView.removeFromSuperview()
+            self.setSelectedView(nil)
+        }
+    }
+
     fileprivate func cleanupBeforeSavingImage() {
         // this should untoggle toggle
         if lastSelectedView != nil {
@@ -99,14 +94,4 @@ extension PhotoEditorViewController {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
-    func hideControls() {
-        for control in hiddenControls {
-            switch control {
-            case .text:
-                textButton.isHidden = true
-            }
-        }
-    }
-
 }

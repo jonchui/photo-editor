@@ -42,15 +42,21 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
     // Highlights current view visually (yellow see-through background, red border, and shadow) so that any
     // pinching/rotating on entire image affects only that view.
     // If you call this on the currently selected View again, it simply deselects it
-    func setSelectedView(_ selectedView : UIView) {
+    // if you want to deselect, pass in nil to selectedView
+    func setSelectedView(_ selectedView : UIView?) {
         if logExtraDebug {
-            print("setSelectedView: \(selectedView)")
+            print("setSelectedView: \(String(describing: selectedView))")
+        }
+
+        guard let selectedView = selectedView else {
+            clearLastSelectedViewAndDisableDeleteButton()
+            return
         }
 
         // If selectedView is currently selected, let's deselect & early return. There's nothing left to do
         if lastSelectedView == selectedView {
             unHighlightView(selectedView)
-            self.lastSelectedView = nil
+            clearLastSelectedViewAndDisableDeleteButton()
             return
         }
 
@@ -60,6 +66,13 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         }
         lastSelectedView = selectedView
         highlightView(selectedView)
+        self.deleteView.isUserInteractionEnabled = true
+    }
+
+    private func clearLastSelectedViewAndDisableDeleteButton() {
+        self.lastSelectedView = nil
+        // disable deleted button, b/c no view is selected
+        self.deleteView.isUserInteractionEnabled = false
     }
 
     // Adds yellow see-through background, red border, and shadow to `view`
@@ -235,7 +248,6 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
             print("move")
         }
         hideToolbar(hide: true)
-        deleteView.isHidden = false
 
         if view != self.lastSelectedView {
             // don't select it if it's already selected
@@ -288,7 +300,6 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
             } else {
                 hideToolbar(hide: false)
             }
-            deleteView.isHidden = true
             let point = recognizer.location(in: self.view)
 
             if deleteView.frame.contains(point) { // Delete the view

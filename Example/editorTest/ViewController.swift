@@ -77,9 +77,6 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         photoEditor.stickers.append(#imageLiteral(resourceName: "camera_pointer"))
         photoEditor.stickers.append(#imageLiteral(resourceName: "camera_circle"))
 
-        //To hide controls - array of enum control
-        photoEditor.hiddenControls = [.text]
-
         present(photoEditor, animated: true, completion: nil)
     }
 

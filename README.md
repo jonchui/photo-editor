@@ -61,9 +61,6 @@ photoEditor.image = image
 //Stickers that the user will choose from to add on the image         
 photoEditor.stickers.append(UIImage(named: "sticker" )!)
 
-//Optional: To hide controls - array of enum control
-photoEditor.hiddenControls = [.crop, .draw, .share]
-
 //Optional: Colors for drawing and Text, If not set default values will be used
 photoEditor.colors = [.red,.blue,.green]
 

@@ -30,8 +30,6 @@ public final class PhotoEditorViewController: UIViewController {
     @IBOutlet weak var colorPickerView: UIView!
     @IBOutlet weak var colorPickerViewBottomConstraint: NSLayoutConstraint!
 
-    //Controls
-    @IBOutlet weak var textButton: UIButton!
 
     public var image: UIImage?
     /**
@@ -45,9 +43,6 @@ public final class PhotoEditorViewController: UIViewController {
 
     public var photoEditorDelegate: PhotoEditorDelegate?
     var colorsCollectionViewDelegate: ColorsCollectionViewDelegate!
-
-    // list of controls to be hidden
-    public var hiddenControls : [control] = []
 
     #if DEBUG
     // Just for testing unlimited photos
@@ -119,7 +114,6 @@ public final class PhotoEditorViewController: UIViewController {
 
         configureCollectionView()
         stickersViewController = StickersViewController(nibName: "StickersViewController", bundle: Bundle(for: StickersViewController.self))
-        hideControls()
 
         // add global pinch gesture
         let pinchGesture = UIPinchGestureRecognizer(target: self,

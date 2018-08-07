@@ -48,14 +48,14 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
             print("setSelectedView: \(String(describing: selectedView))")
         }
 
-        guard let selectedView = selectedView else {
+        guard let nonNilSelectedView = selectedView else {
             clearLastSelectedViewAndDisableDeleteButton()
             return
         }
 
         // If selectedView is currently selected, let's deselect & early return. There's nothing left to do
-        if lastSelectedView == selectedView {
-            unHighlightView(selectedView)
+        if lastSelectedView == nonNilSelectedView {
+            unHighlightView(nonNilSelectedView)
             clearLastSelectedViewAndDisableDeleteButton()
             return
         }
@@ -64,8 +64,8 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         if let lastSelectedView = self.lastSelectedView {
             unHighlightView(lastSelectedView)
         }
-        lastSelectedView = selectedView
-        highlightView(selectedView)
+        lastSelectedView = nonNilSelectedView
+        highlightView(nonNilSelectedView)
         self.deleteView.isUserInteractionEnabled = true
     }
 

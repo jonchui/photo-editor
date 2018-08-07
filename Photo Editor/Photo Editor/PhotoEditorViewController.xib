@@ -76,6 +76,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9an-1W-thw">
                             <rect key="frame" x="12" y="18" width="30" height="37"/>
+                            <accessibility key="accessibilityConfiguration" label="Cancel Button"/>
                             <fontDescription key="fontDescription" name="icomoon" family="icomoon" pointSize="25"/>
                             <size key="titleShadowOffset" width="1" height="0.0"/>
                             <state key="normal" title="">
@@ -86,9 +87,9 @@
                                 <action selector="cancelButtonTapped:" destination="-1" eventType="touchUpInside" id="jpW-r4-cpQ"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNH-TU-KxG">
-                            <rect key="frame" x="305" y="10" width="50" height="62"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNH-TU-KxG">
+                            <rect key="frame" x="310" y="10" width="50" height="62"/>
+                            <accessibility key="accessibilityConfiguration" label="Save Image Button"/>
                             <fontDescription key="fontDescription" name="icomoon" family="icomoon" pointSize="50"/>
                             <size key="titleShadowOffset" width="1" height="0.0"/>
                             <state key="normal" title="">
@@ -103,6 +104,8 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="9an-1W-thw" firstAttribute="centerY" secondItem="3MS-N5-3xY" secondAttribute="centerY" id="1bY-xX-lhc"/>
+                        <constraint firstAttribute="trailing" secondItem="wNH-TU-KxG" secondAttribute="trailing" constant="15" id="Ka4-ww-C6t"/>
+                        <constraint firstAttribute="bottom" secondItem="wNH-TU-KxG" secondAttribute="bottom" id="Szs-pe-ZvF"/>
                         <constraint firstItem="9an-1W-thw" firstAttribute="leading" secondItem="3MS-N5-3xY" secondAttribute="leading" constant="12" id="lPL-cU-BVr"/>
                         <constraint firstItem="9an-1W-thw" firstAttribute="top" secondItem="3MS-N5-3xY" secondAttribute="top" constant="18" id="q7E-77-wGy"/>
                     </constraints>
@@ -118,10 +121,10 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="87h-1G-t5q" customClass="PassThroughView" customModule="iOSPhotoEditor" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                    <rect key="frame" x="0.0" y="597" width="375" height="70"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Doi-2Z-r5q">
-                            <rect key="frame" x="20" y="0.0" width="180" height="50"/>
+                            <rect key="frame" x="20" y="10" width="180" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELE-cG-xL1" userLabel="arrowButton">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -174,11 +177,10 @@
                             </constraints>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAt-sK-1nK">
-                            <rect key="frame" x="310" y="0.0" width="50" height="50"/>
+                            <rect key="frame" x="310" y="10" width="50" height="50"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdL-fW-OWp">
-                                    <rect key="frame" x="10" y="0.0" width="35" height="47"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdL-fW-OWp">
+                                    <rect key="frame" x="8" y="2" width="35" height="47"/>
                                     <fontDescription key="fontDescription" name="icomoon" family="icomoon" pointSize="35"/>
                                     <state key="normal" title="">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -188,19 +190,19 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="DdL-fW-OWp" firstAttribute="centerX" secondItem="yAt-sK-1nK" secondAttribute="centerX" id="2md-aw-hmf"/>
                                 <constraint firstAttribute="width" constant="50" id="Cbh-qN-Nr4"/>
                                 <constraint firstAttribute="height" constant="50" id="iud-MD-vZ2"/>
+                                <constraint firstItem="DdL-fW-OWp" firstAttribute="centerY" secondItem="yAt-sK-1nK" secondAttribute="centerY" id="wqK-ho-EIg"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="7QB-HT-iOq"/>
-                        <constraint firstItem="yAt-sK-1nK" firstAttribute="top" secondItem="Doi-2Z-r5q" secondAttribute="top" id="GHe-VW-WLf"/>
+                        <constraint firstAttribute="height" constant="70" id="7QB-HT-iOq"/>
+                        <constraint firstItem="Doi-2Z-r5q" firstAttribute="centerY" secondItem="87h-1G-t5q" secondAttribute="centerY" id="Gmp-wD-Rc6"/>
                         <constraint firstAttribute="trailing" secondItem="yAt-sK-1nK" secondAttribute="trailing" constant="15" id="OTp-lc-man"/>
-                        <constraint firstItem="Doi-2Z-r5q" firstAttribute="top" secondItem="87h-1G-t5q" secondAttribute="top" id="nAt-60-D22"/>
+                        <constraint firstItem="yAt-sK-1nK" firstAttribute="centerY" secondItem="87h-1G-t5q" secondAttribute="centerY" id="xaE-KZ-lg9"/>
                         <constraint firstItem="Doi-2Z-r5q" firstAttribute="leading" secondItem="87h-1G-t5q" secondAttribute="leading" constant="20" id="zlB-Qt-Uso"/>
                     </constraints>
                 </view>

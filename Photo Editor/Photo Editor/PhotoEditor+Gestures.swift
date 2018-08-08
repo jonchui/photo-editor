@@ -17,6 +17,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      Selecting transparent parts of the imageview won't move the object
      */
     func panGesture(_ recognizer: UIPanGestureRecognizer) {
+        dismissActiveTextViewIfAvailable()
         guard !userIsPinchingOrRotatingEntireScreen else {
             if logExtraDebug {
                 print("do not pan: user is pinching")
@@ -44,6 +45,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
     // If you call this on the currently selected View again, it simply deselects it
     // if you want to deselect, pass in nil to selectedView
     func setSelectedView(_ selectedView : UIView?) {
+
         if logExtraDebug {
             print("setSelectedView: \(String(describing: selectedView))")
         }
@@ -51,6 +53,11 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         guard let nonNilSelectedView = selectedView else {
             clearLastSelectedViewAndDisableDeleteButton()
             return
+        }
+
+        // if textview is editing, let's select resign it
+        if !nonNilSelectedView.isKind(of: UITextView.self) {
+            dismissActiveTextViewIfAvailable()
         }
 
         // If selectedView is currently selected, let's deselect & early return. There's nothing left to do
@@ -67,6 +74,11 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         lastSelectedView = nonNilSelectedView
         highlightView(nonNilSelectedView)
         self.deleteView.isUserInteractionEnabled = true
+    }
+
+    private func dismissActiveTextViewIfAvailable() {
+        activeTextView?.resignFirstResponder()
+        doneButtonTapped(activeTextView)
     }
 
     private func clearLastSelectedViewAndDisableDeleteButton() {
@@ -118,6 +130,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
             print("pinch")
         }
         setGlobalStateForPinchingORRotating(recognizer.state)
+        dismissActiveTextViewIfAvailable()
 
         if let selectedView = self.lastSelectedView {
             if selectedView is UITextView {
@@ -159,6 +172,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      */
     func rotationGesture(_ recognizer: UIRotationGestureRecognizer) {
         setGlobalStateForPinchingORRotating(recognizer.state)
+        dismissActiveTextViewIfAvailable()
 
         // cannot guard against this, b/c it can happen when we zoom
         if logExtraDebug {
@@ -175,6 +189,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      Will make scale scale Effect
      */
     func tapGesture(_ recognizer: UITapGestureRecognizer) {
+        dismissActiveTextViewIfAvailable()
         guard !userIsPinchingOrRotatingEntireScreen else {
             if logExtraDebug {
                 print("do not tap: user is pinching")

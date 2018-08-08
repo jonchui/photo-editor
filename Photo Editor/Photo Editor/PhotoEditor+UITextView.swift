@@ -45,12 +45,6 @@ extension PhotoEditorViewController: UITextViewDelegate {
                 return
         }
         activeTextView = nil
-        textView.font = self.lastTextViewFont!
-        UIView.animate(withDuration: 0.3,
-                       animations: {
-                        textView.transform = self.lastTextViewTransform!
-                        textView.center = self.lastTextViewTransCenter!
-        }, completion: nil)
         resizeTextViewToFitText(textView)
     }
 

@@ -89,6 +89,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
 
     // Adds yellow see-through background, red border, and shadow to `view`
     private func highlightView(_ view : UIView) {
+        scaleEffect(view: view)
         view.backgroundColor = UIColor.yellow.withAlphaComponent(0.5)
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.red.withAlphaComponent(0.5).cgColor
@@ -222,7 +223,6 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
                     return
                 }
             }
-            scaleEffect(view: view)
             self.setSelectedView(view)
         }
     }

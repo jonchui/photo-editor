@@ -19,8 +19,7 @@ extension PhotoEditorViewController {
      // MARK: Top Toolbar
 
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        photoEditorDelegate?.canceledEditing()
-        self.dismiss(animated: true, completion: nil)
+        showWarningAlertBeforeClosing()
     }
 
     @IBAction func addCircleStickerTapped(_ sender: Any) {
@@ -76,6 +75,16 @@ extension PhotoEditorViewController {
         if lastSelectedView != nil {
             self.setSelectedView(lastSelectedView!)
         }
+    }
+
+    func showWarningAlertBeforeClosing() {
+        let alert = UIAlertController(title: "Are You Sure", message: "You are about to delete the image, this can not be undone", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel))
+        alert.addAction(UIAlertAction(title: "Delete the image", style: UIAlertActionStyle.destructive) { [weak self] _ in
+            self?.photoEditorDelegate?.canceledEditing()
+            self?.dismiss(animated: true, completion: nil)
+        })
+        self.present(alert, animated: true)
     }
 
     @IBAction func continueButtonPressed(_ sender: Any) {

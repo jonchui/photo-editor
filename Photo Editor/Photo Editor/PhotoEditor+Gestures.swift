@@ -137,6 +137,9 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
                 textView.setNeedsDisplay()
             } else {
                 selectedView.transform = selectedView.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
+                if logExtraDebug {
+                    print("scale: \(recognizer.scale)")
+                }
             }
             recognizer.scale = 1
         }

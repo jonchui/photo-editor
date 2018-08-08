@@ -22,14 +22,17 @@ extension PhotoEditorViewController: UITextViewDelegate {
 
     public func textViewDidBeginEditing(_ textView: UITextView) {
         isTyping = true
-        lastTextViewTransform =  textView.transform
-        lastTextViewTransCenter = textView.center
-        lastTextViewFont = textView.font!
+        saveTextViewState(textView)
+
         activeTextView = textView
         self.setSelectedView(textView)
+
+        // make text visible for editing
         textView.superview?.bringSubview(toFront: textView)
-        textView.font = UIFont(name: "Helvetica", size: 30)
+        textView.font = UIFont(name: "Helvetica", size: 25)
         textView.textColor = UIColor.red
+
+        // move textview to center top so we can edit
         UIView.animate(withDuration: 0.3,
                        animations: {
                         textView.transform = CGAffineTransform.identity
@@ -45,6 +48,13 @@ extension PhotoEditorViewController: UITextViewDelegate {
                 return
         }
         activeTextView = nil
+
+        UIView.animate(withDuration: 0.3,
+                       animations: { [weak self] in
+                        self?.restoreTextViewState(textView)
+        }, completion: nil)
+
+        // because editing has occured, let's resize it
         resizeTextViewToFitText(textView)
     }
 
@@ -55,6 +65,24 @@ extension PhotoEditorViewController: UITextViewDelegate {
             return false
         }
         return true
+    }
+
+    fileprivate func saveTextViewState(_ textView: UITextView) {
+        lastTextViewTransform =  textView.transform
+        lastTextViewTransCenter = textView.center
+        lastTextViewFont = textView.font!
+        lastTextViewFontColor = textView.textColor
+    }
+
+    fileprivate func restoreTextViewState(_ textView: UITextView) {
+        if lastTextViewTransform !=  nil {
+            textView.transform = lastTextViewTransform!
+        }
+        if lastTextViewTransCenter != nil {
+            textView.center = lastTextViewTransCenter!
+        }
+        textView.font = lastTextViewFont
+        textView.textColor = lastTextViewFontColor
     }
 
 }

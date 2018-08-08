@@ -64,7 +64,7 @@ public final class PhotoEditorViewController: UIViewController {
 
     var stickersVCIsVisible = false
     var drawColor: UIColor = UIColor.black
-    var textColor: UIColor = UIColor.white
+    var textColor: UIColor = UIColor.red // THE default initial color
     var isDrawing: Bool = false
     var lastPoint: CGPoint!
     var swiped = false
@@ -72,6 +72,7 @@ public final class PhotoEditorViewController: UIViewController {
     var lastTextViewTransform: CGAffineTransform?
     var lastTextViewTransCenter: CGPoint?
     var lastTextViewFont:UIFont?
+    var lastTextViewFontColor:UIColor?
     var activeTextView: UITextView?
     var imageViewToPan: UIImageView?
     var isTyping: Bool = false

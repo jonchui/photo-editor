@@ -148,17 +148,33 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
                 }
 
                 textView.setNeedsDisplay()
-            } else {
+            } else if selectedView is UIImageView {
                 if logExtraDebug {
                     print("scale: \(recognizer.scale)\nframe: \(selectedView.frame)")
                 }
                 // < 1.0 means we're shrinking, so let it through.
                 // limit the image to < 1/2 of the screen width
-                if recognizer.scale < 1.0 || selectedView.frame.size.width < UIScreen.main.bounds.size.width/2 {
+                let maxWidth : CGFloat
+                let minWidth : CGFloat
+
+                if let imageType = ImageType(rawValue: selectedView.tag) {
+                    minWidth = imageType.minWidth()
+                    maxWidth = imageType.maxWidth()
+                } else {
+                    // default to
+                    minWidth = ImageType.arrow.minWidth()
+                    maxWidth = ImageType.circle.minWidth()
+                }
+
+                // if we're decreasing or pinching in, limit by minWidth
+                if ((recognizer.scale <= 1.0 && selectedView.frame.size.width > minWidth) ||
+                    // if we're increasing / pinching out, limit by maxWidth
+                    (recognizer.scale >= 1.0 && selectedView.frame.size.width < maxWidth) ) {
+                    // allow the transform
                     selectedView.transform = selectedView.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
                 } else {
                     if logExtraDebug {
-                        print("do not transform the view, its too large")
+                        print("do not transform the view: \(selectedView.frame.size.width)")
                     }
                 }
 

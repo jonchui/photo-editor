@@ -37,9 +37,9 @@ protocol StickersViewControllerDelegate {
     func didSelectView(view: UIView)
     /**
      - Parameter image: selected Image from StickersViewController
-     - Parameter size: the size of the image
+     - Parameter imageType: the type of image from the @enum `ImageType`
      */
-    func didSelectImage(image: UIImage, size: CGSize)
+    func addImageToCanvas(image: UIImage, type: ImageType)
     /**
      StickersViewController did Disappear
      */

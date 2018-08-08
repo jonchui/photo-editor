@@ -218,7 +218,7 @@ extension StickersViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        stickersViewControllerDelegate?.didSelectImage(image: stickers[indexPath.item], size:CGSize(width: 150, height: 150))
+        stickersViewControllerDelegate?.addImageToCanvas(image: stickers[indexPath.item], type:ImageType.circle)
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {

@@ -23,11 +23,11 @@ extension PhotoEditorViewController {
     }
 
     @IBAction func addCircleStickerTapped(_ sender: Any) {
-        didSelectImage(image: #imageLiteral(resourceName: "camera_circle"), size:CGSize(width: 100, height: 100))
+        addImageToCanvas(image: #imageLiteral(resourceName: "camera_circle"), type: ImageType.circle)
     }
 
     @IBAction func addArrowStickerTapped(_ sender: Any) {
-        didSelectImage(image: #imageLiteral(resourceName: "camera_pointer"), size:CGSize(width:50, height:50))
+        addImageToCanvas(image: #imageLiteral(resourceName: "camera_pointer"), type: ImageType.arrow)
     }
 
     @IBAction func addTextStickerTapped(_ sender: Any) {

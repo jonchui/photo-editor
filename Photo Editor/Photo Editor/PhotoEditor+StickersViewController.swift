@@ -9,6 +9,40 @@
 import Foundation
 import UIKit
 
+// MARK: - ImageType
+public enum ImageType : Int {
+    case arrow = 1 // cannot start by 0, as we store this raw value in the ImageView.tag property which defualts to 0
+    case circle = 2
+
+    func size() -> CGSize {
+        switch (self) {
+        case .arrow:
+            return CGSize(width: 50, height: 50)
+        case .circle:
+            return CGSize(width: 100, height: 100)
+        }
+    }
+
+    // the maximum width we should allow for this image
+    func maxWidth() -> CGFloat {
+        switch (self) {
+        case .arrow:
+            return UIScreen.main.bounds.size.width/2
+        case .circle:
+            return UIScreen.main.bounds.size.width
+        }
+    }
+
+    func minWidth() -> CGFloat {
+        switch (self) {
+        case .arrow:
+            return 25
+        case .circle:
+            return 50
+        }
+    }
+}
+
 extension PhotoEditorViewController {
 
     func addStickersViewController() {
@@ -58,12 +92,13 @@ extension PhotoEditorViewController: StickersViewControllerDelegate {
         addGestures(view: view)
     }
 
-    func didSelectImage(image: UIImage, size: CGSize = CGSize(width: 50, height: 50)) {
+    func addImageToCanvas(image: UIImage, type: ImageType) {
         self.removeStickersView()
 
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
-        imageView.frame.size = size
+        imageView.frame.size = type.size()
+        imageView.tag = type.rawValue
         imageView.center = canvasImageView.center
 
         self.canvasImageView.addSubview(imageView)

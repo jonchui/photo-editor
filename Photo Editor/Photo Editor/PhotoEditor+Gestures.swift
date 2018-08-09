@@ -45,37 +45,42 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
     // If you call this on the currently selected View again, it simply deselects it
     // if you want to deselect, pass in nil to selectedView
     func setSelectedView(_ selectedView : UIView?) {
-
-        if logExtraDebug {
-            print("setSelectedView: \(String(describing: selectedView))")
-        }
-
         guard let nonNilSelectedView = selectedView else {
             clearLastSelectedViewAndDisableDeleteButton()
             return
         }
 
-        // if textview is editing, let's select resign it
-        if !nonNilSelectedView.isKind(of: UITextView.self) {
-            dismissActiveTextViewIfAvailable()
+        if logExtraDebug {
+            print("setSelectedView: \(String(describing: selectedView))")
         }
 
-        // If selectedView is currently selected, let's deselect & early return. There's nothing left to do
-        if lastSelectedView == nonNilSelectedView {
-            unHighlightView(nonNilSelectedView)
-            clearLastSelectedViewAndDisableDeleteButton()
-            return
+        // We only want to unhighlight the current view or the last selected one, IFF we're NOT typing
+        if (!isTyping) {
+            // if textview is editing, let's select resign it
+            if !nonNilSelectedView.isKind(of: UITextView.self) {
+                dismissActiveTextViewIfAvailable()
+            }
+
+            // If selectedView is currently selected, let's deselect & early return. There's nothing left to do, since the user tapped the selected view. UNLESS we are typing, in which case
+            if lastSelectedView == nonNilSelectedView{
+                unHighlightView(nonNilSelectedView)
+                clearLastSelectedViewAndDisableDeleteButton()
+                return
+            }
         }
 
         // Deselect the lastSelectedView in preparation of selecting the new one
         if let lastSelectedView = self.lastSelectedView {
             unHighlightView(lastSelectedView)
         }
+
+        // ah, we're finally ready to actually select the view!
         lastSelectedView = nonNilSelectedView
         highlightView(nonNilSelectedView)
         self.deleteView.isUserInteractionEnabled = true
     }
 
+    // if the user isTyping into a textview, dissmiss it
     private func dismissActiveTextViewIfAvailable() {
         activeTextView?.resignFirstResponder()
         doneButtonTapped(activeTextView)

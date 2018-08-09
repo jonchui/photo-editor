@@ -116,11 +116,14 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
     }
 
     fileprivate func setGlobalStateForPinchingORRotating(_ state: UIGestureRecognizerState) {
+        if logExtraDebug {
+            print("pinching state: \(state.rawValue)")
+        }
         switch state {
-        case .possible, .changed:
+        case .possible:
             // do nothing
             userIsPinchingOrRotatingEntireScreen = true
-        case .ended, .cancelled, .failed:
+        case .ended, .cancelled, .failed, .changed:
             userIsPinchingOrRotatingEntireScreen = false
         case .began:
             userIsPinchingOrRotatingEntireScreen = true

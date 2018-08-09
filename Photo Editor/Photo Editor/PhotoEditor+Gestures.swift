@@ -70,7 +70,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
             }
 
             // If selectedView is currently selected, let's deselect & early return. There's nothing left to do, since the user tapped the selected view. UNLESS we are typing, in which case
-            if lastSelectedView == nonNilSelectedView{
+            if lastSelectedView == nonNilSelectedView {
                 unHighlightView(nonNilSelectedView)
                 self.lastSelectedView = nil
 

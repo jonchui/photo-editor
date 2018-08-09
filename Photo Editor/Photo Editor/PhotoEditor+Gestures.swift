@@ -12,9 +12,20 @@ import UIKit
 
 extension PhotoEditorViewController : UIGestureRecognizerDelegate {
 
+    fileprivate func moveViewOnlyInRecognizerBeganState(_ recognizer: UIPanGestureRecognizer, _ view: UIView) {
+        if recognizer.state != .began {
+            guard view == lastSelectedView else {
+                if logExtraDebug {
+                    print("do not pan: user is panning another view")
+                }
+                return
+            }
+        }
+        moveView(view: view, recognizer: recognizer)
+    }
+
     /**
      UIPanGestureRecognizer - Moving Objects
-     Selecting transparent parts of the imageview won't move the object
      */
     func panGesture(_ recognizer: UIPanGestureRecognizer) {
         dismissActiveTextViewIfAvailable()
@@ -28,15 +39,27 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
             print("pan")
         }
         if let view = recognizer.view {
-            if recognizer.state != .began {
-                guard view == lastSelectedView else {
-                    if logExtraDebug {
-                        print("do not pan: user is panning another view")
-                    }
-                    return
-                }
+            moveViewOnlyInRecognizerBeganState(recognizer, view)
+        }
+    }
+
+    /**
+     UIPanGestureRecognizer - Moves only the `lastSelectedView` object
+     */
+    func globalPanGesture(_ recognizer: UIPanGestureRecognizer) {
+        dismissActiveTextViewIfAvailable()
+        guard !userIsPinchingOrRotatingEntireScreen else {
+            if logExtraDebug {
+                print("do not global pan: user is pinching")
             }
-            moveView(view: view, recognizer: recognizer)
+            return
+        }
+        if logExtraDebug {
+            print("global pan")
+        }
+
+        if let view = self.lastSelectedView {
+            moveViewOnlyInRecognizerBeganState(recognizer, view)
         }
     }
 

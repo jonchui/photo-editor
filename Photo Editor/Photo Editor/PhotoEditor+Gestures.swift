@@ -40,13 +40,21 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         }
     }
 
+    fileprivate func disableTrashCanButton() {
+        UIView.animate(withDuration: 0.25) {
+            self.deleteViewTrashButton.alpha = 0.5
+            self.deleteViewTrashButton.isEnabled = false
+        }
+    }
+
     // Highlights current view visually (yellow see-through background, red border, and shadow) so that any
     // pinching/rotating on entire image affects only that view.
     // If you call this on the currently selected View again, it simply deselects it
     // if you want to deselect, pass in nil to selectedView
     func setSelectedView(_ selectedView : UIView?) {
         guard let nonNilSelectedView = selectedView else {
-            clearLastSelectedViewAndDisableDeleteButton()
+            self.lastSelectedView = nil
+            disableTrashCanButton()
             return
         }
 
@@ -64,7 +72,9 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
             // If selectedView is currently selected, let's deselect & early return. There's nothing left to do, since the user tapped the selected view. UNLESS we are typing, in which case
             if lastSelectedView == nonNilSelectedView{
                 unHighlightView(nonNilSelectedView)
-                clearLastSelectedViewAndDisableDeleteButton()
+                self.lastSelectedView = nil
+
+                disableTrashCanButton()
                 return
             }
         }
@@ -76,22 +86,20 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
 
         // ah, we're finally ready to actually select the view!
         lastSelectedView = nonNilSelectedView
+
         highlightView(nonNilSelectedView)
-        self.deleteViewTrashButton.isEnabled = true
-        self.deleteViewTrashButton.alpha = 1.0
+
+        // enable trash can button
+        UIView.animate(withDuration: 0.25) {
+            self.deleteViewTrashButton.isEnabled = true
+            self.deleteViewTrashButton.alpha = 1.0
+        }
     }
 
     // if the user isTyping into a textview, dissmiss it
     private func dismissActiveTextViewIfAvailable() {
         activeTextView?.resignFirstResponder()
         doneButtonTapped(activeTextView)
-    }
-
-    private func clearLastSelectedViewAndDisableDeleteButton() {
-        self.lastSelectedView = nil
-        // disable deleted button, b/c no view is selected
-        self.deleteViewTrashButton.isEnabled = false
-        self.deleteViewTrashButton.alpha = 0.5
     }
 
     // Adds yellow see-through background, red border, and shadow to `view`

@@ -127,6 +127,9 @@ public final class PhotoEditorViewController: UIViewController {
                                                                     action:#selector(PhotoEditorViewController.rotationGesture) )
         rotationGestureRecognizer.delegate = self
         self.view.addGestureRecognizer(rotationGestureRecognizer)
+
+        // initial setup
+        self.setSelectedView(nil)
     }
 
     func configureCollectionView() {

@@ -239,6 +239,11 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      Support Multiple Gesture at the same time
      */
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // If the gesture recognizers are on diferent views, do not allow
+        // simultaneous recognition.
+        if gestureRecognizer.view != otherGestureRecognizer.view {
+            return false
+        }
         return true
     }
 

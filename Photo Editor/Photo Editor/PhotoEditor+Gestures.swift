@@ -77,7 +77,8 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         // ah, we're finally ready to actually select the view!
         lastSelectedView = nonNilSelectedView
         highlightView(nonNilSelectedView)
-        self.deleteView.isUserInteractionEnabled = true
+        self.deleteViewTrashButton.isEnabled = true
+        self.deleteViewTrashButton.alpha = 1.0
     }
 
     // if the user isTyping into a textview, dissmiss it
@@ -89,7 +90,8 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
     private func clearLastSelectedViewAndDisableDeleteButton() {
         self.lastSelectedView = nil
         // disable deleted button, b/c no view is selected
-        self.deleteView.isUserInteractionEnabled = false
+        self.deleteViewTrashButton.isEnabled = false
+        self.deleteViewTrashButton.alpha = 0.5
     }
 
     // Adds yellow see-through background, red border, and shadow to `view`

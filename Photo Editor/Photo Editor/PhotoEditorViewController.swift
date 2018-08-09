@@ -25,6 +25,7 @@ public final class PhotoEditorViewController: UIViewController {
     @IBOutlet weak var bottomGradient: UIView!
 
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var deleteViewTrashButton: UIButton!
     @IBOutlet weak var deleteView: UIView!
     @IBOutlet weak var colorsCollectionView: UICollectionView!
     @IBOutlet weak var colorPickerView: UIView!

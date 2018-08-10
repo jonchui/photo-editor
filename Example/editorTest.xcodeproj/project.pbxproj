@@ -179,7 +179,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect";
+			shellScript = "echo going to run swiftlint here:\necho `PWD`\n\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect";
 		};
 		CB9648D33B66302E0DFB4FDA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

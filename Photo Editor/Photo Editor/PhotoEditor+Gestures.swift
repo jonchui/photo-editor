@@ -68,7 +68,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
     // If you call this on the currently selected View again, it simply deselects it
     // if you want to deselect, pass in nil to selectedView
     func setSelectedView(_ selectedView : UIView?) {
-        guard let nonNilSelectedView = selectedView else {
+        guard let nonNilSelectedView = selectedView else{
             self.lastSelectedView = nil
             disableTrashCanButton()
             return

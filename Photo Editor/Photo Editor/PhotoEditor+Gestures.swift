@@ -10,6 +10,22 @@ import Foundation
 
 import UIKit
 
+extension UIView {
+    // Easy way to return whether or not the view is an ImageType
+    func asPhotoEditorSticker() -> ImageType? {
+        guard self is UIImageView || self is UITextView else {
+            return nil
+        }
+        switch (self.tag) {
+        case ImageType.circle.rawValue,
+             ImageType.arrow.rawValue:
+            return ImageType(rawValue: self.tag)
+        default:
+            return nil
+        }
+    }
+}
+
 extension PhotoEditorViewController : UIGestureRecognizerDelegate {
 
     /**
@@ -203,9 +219,9 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
     }
 
     /**
-     UIRotationGestureRecognizer - Rotating Objects
+     UIRotationGestureRecognizer - Rotating the `lastSelectedView` object, iff it's ImageType#allowRotation is true
      */
-    func rotationGesture(_ recognizer: UIRotationGestureRecognizer) {
+    func globalRotationGesture(_ recognizer: UIRotationGestureRecognizer) {
         setGlobalStateForPinchingORRotating(recognizer.state)
         dismissActiveTextViewIfAvailable()
 
@@ -213,9 +229,12 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         if logExtraDebug {
             print("rotate")
         }
-        if let selectedView = self.lastSelectedView {
-            selectedView.transform = selectedView.transform.rotated(by: recognizer.rotation)
-            recognizer.rotation = 0
+        if let selectedView = self.lastSelectedView,
+            let allowRotation = selectedView.asPhotoEditorSticker()?.allowRotation() {
+            if allowRotation {
+                selectedView.transform = selectedView.transform.rotated(by: recognizer.rotation)
+                recognizer.rotation = 0
+            }
         }
     }
 

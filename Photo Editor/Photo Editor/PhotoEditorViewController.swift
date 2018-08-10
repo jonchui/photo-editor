@@ -123,10 +123,10 @@ public final class PhotoEditorViewController: UIViewController {
         self.view.addGestureRecognizer(pinchGesture)
 
         // add global rotate gesture
-        let rotationGestureRecognizer = UIRotationGestureRecognizer(target: self,
-                                                                    action:#selector(PhotoEditorViewController.rotationGesture) )
-        rotationGestureRecognizer.delegate = self
-        self.view.addGestureRecognizer(rotationGestureRecognizer)
+        let globalRotationGestureRecognizer = UIRotationGestureRecognizer(target: self,
+                                                                    action:#selector(PhotoEditorViewController.globalRotationGesture) )
+        globalRotationGestureRecognizer.delegate = self
+        self.view.addGestureRecognizer(globalRotationGestureRecognizer)
 
         // initial setup
         self.setSelectedView(nil)

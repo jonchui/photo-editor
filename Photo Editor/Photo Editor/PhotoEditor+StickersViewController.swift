@@ -13,13 +13,17 @@ import UIKit
 public enum ImageType : Int {
     case arrow = 1 // cannot start by 0, as we store this raw value in the ImageView.tag property which defualts to 0
     case circle = 2
+    case text = 3
 
-    func size() -> CGSize {
+    // the initial size of the sticker when placed onto the canvas
+    func intialSize() -> CGSize {
         switch (self) {
         case .arrow:
             return CGSize(width: 50, height: 50)
         case .circle:
             return CGSize(width: 100, height: 100)
+        case .text:
+            fatalError("should not be using initialSize on text - text autosizes itself")
         }
     }
 
@@ -27,18 +31,31 @@ public enum ImageType : Int {
     func maxWidth() -> CGFloat {
         switch (self) {
         case .arrow:
-            return UIScreen.main.bounds.size.width/2
+            return 150
         case .circle:
-            return UIScreen.main.bounds.size.width
+            return 300
+        case .text:
+            fatalError("should not be using initialSize on text - text autosizes itself")
         }
     }
 
     func minWidth() -> CGFloat {
         switch (self) {
         case .arrow:
-            return 25
+            return 40
         case .circle:
             return 50
+        case .text:
+            fatalError("should not be using initialSize on text - text autosizes itself")
+        }
+    }
+
+    func allowRotation() -> Bool {
+        switch (self) {
+        case .arrow:
+            return true
+        case .circle, .text:
+            return false
         }
     }
 }
@@ -97,7 +114,7 @@ extension PhotoEditorViewController: StickersViewControllerDelegate {
 
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
-        imageView.frame.size = type.size()
+        imageView.frame.size = type.intialSize()
         imageView.tag = type.rawValue
         imageView.center = canvasImageView.center
 

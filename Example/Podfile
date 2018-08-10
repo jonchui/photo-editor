@@ -7,4 +7,6 @@ target 'editorTest' do
 
   # Pods for editorTest
   pod 'iOSPhotoEditor', :path => '../'
+  # so when we make separate changes, they don't appear after building in the main project
+  pod 'SwiftLint'
 end

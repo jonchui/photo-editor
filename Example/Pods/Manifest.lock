@@ -1,16 +1,23 @@
 PODS:
-  - iOSPhotoEditor (0.5.3)
+  - iOSPhotoEditor (0.6.5)
+  - SwiftLint (0.27.0)
 
 DEPENDENCIES:
   - iOSPhotoEditor (from `../`)
+  - SwiftLint
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SwiftLint
 
 EXTERNAL SOURCES:
   iOSPhotoEditor:
     :path: "../"
 
 SPEC CHECKSUMS:
-  iOSPhotoEditor: 6dddc6807b24ec81a46642f21c47624659bd677c
+  iOSPhotoEditor: 2f94cc87b616a823fcb428364d298da7884e7175
+  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
-PODFILE CHECKSUM: 665b2259164ed46a2784945737fe129fde3c8962
+PODFILE CHECKSUM: 7ea4b55c2e21e218d8a98aaff18e343435520624
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.5.3

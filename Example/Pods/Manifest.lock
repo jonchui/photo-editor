@@ -1,5 +1,5 @@
 PODS:
-  - iOSPhotoEditor (0.6.5)
+  - iOSPhotoEditor (0.6.6)
   - SwiftLint (0.27.0)
 
 DEPENDENCIES:
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  iOSPhotoEditor: 2f94cc87b616a823fcb428364d298da7884e7175
+  iOSPhotoEditor: 487fb2e8e88fd09c2cda2dee7fe8949b0b899a1d
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
 
 PODFILE CHECKSUM: 7ea4b55c2e21e218d8a98aaff18e343435520624

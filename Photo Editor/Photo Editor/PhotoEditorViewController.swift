@@ -41,6 +41,11 @@ public final class PhotoEditorViewController: UIViewController {
      */
     public var colors  : [UIColor] = []
 
+    /**
+     Whether textviews can be edited (by long tapping or double-tapping on them).
+     */
+    public var allowInlineTextEditing : Bool = false
+
     public var photoEditorDelegate: PhotoEditorDelegate?
     var colorsCollectionViewDelegate: ColorsCollectionViewDelegate!
 

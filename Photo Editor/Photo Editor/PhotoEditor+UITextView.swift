@@ -56,6 +56,9 @@ extension PhotoEditorViewController: UITextViewDelegate {
 
         // because editing has occured, let's resize it
         resizeTextViewToFitText(textView)
+
+        // we have to do this here and not when we first create the textview, b/c we still need to be able to edit it once
+        textView.isEditable = self.allowInlineTextEditing
     }
 
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

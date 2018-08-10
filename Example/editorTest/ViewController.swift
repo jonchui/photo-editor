@@ -76,6 +76,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         //Stickers that the user will choose from to add on the image
         photoEditor.stickers.append(#imageLiteral(resourceName: "camera_pointer"))
         photoEditor.stickers.append(#imageLiteral(resourceName: "camera_circle"))
+        photoEditor.allowInlineTextEditing = false
 
         present(photoEditor, animated: true, completion: nil)
     }

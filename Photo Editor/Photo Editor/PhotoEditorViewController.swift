@@ -177,6 +177,7 @@ extension PhotoEditorViewController: ColorDelegate {
             self.drawColor = color
         } else if activeTextView != nil {
             activeTextView?.textColor = color
+            lastTextViewFontColor = color
             textColor = color
         }
     }

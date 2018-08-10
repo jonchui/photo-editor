@@ -67,7 +67,7 @@ extension ViewController: PhotoEditorDelegate {
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     fileprivate func showPhotoEditorWithImage(_ image: UIImage) {
-        let photoEditor = PhotoEditorViewController(nibName:"PhotoEditorViewController",bundle: Bundle(for: PhotoEditorViewController.self))
+        let photoEditor = PhotoEditorViewController(nibName: "PhotoEditorViewController", bundle: Bundle(for: PhotoEditorViewController.self))
         photoEditor.photoEditorDelegate = self
         photoEditor.image = image
         //Colors for drawing and Text, If not set default values will be used
@@ -82,7 +82,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     }
 
     func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : Any]) {
+                               didFinishPickingMediaWithInfo info: [String: Any]) {
 
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             picker.dismiss(animated: true, completion: nil)

@@ -98,7 +98,7 @@ public final class PhotoEditorViewController: UIViewController {
     override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-    
+
     //Register Custom font before we load XIB
     public override func loadView() {
         registerFont()

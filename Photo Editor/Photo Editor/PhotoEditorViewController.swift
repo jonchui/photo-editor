@@ -92,10 +92,10 @@ public final class PhotoEditorViewController: UIViewController {
     var stickersViewController: StickersViewController!
 
     //Register Custom font before we load XIB
-    public override func loadView() {
-        registerFont()
-        super.loadView()
-    }
+//    public override func loadView() {
+//        registerFont()
+//        super.loadView()
+//    }
 
     override public func viewDidLoad() {
         super.viewDidLoad()

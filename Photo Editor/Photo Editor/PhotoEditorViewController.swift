@@ -8,6 +8,16 @@
 
 import UIKit
 
+extension UIImagePickerController {
+    override open var shouldAutorotate: Bool {
+        return true
+    }
+    override open var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .all
+    }
+}
+
+
 public final class PhotoEditorViewController: UIViewController {
 
     /** holding the 2 imageViews original image and drawing & stickers */

@@ -28,10 +28,15 @@ extension UIView {
         let scale = originalImage.size.width / workingView.bounds.width
         let layer = workingView.layer
 
+        var retImage : UIImage?
         UIGraphicsBeginImageContextWithOptions(originalImage.size, false, originalImage.scale)
         originalImage.draw(at: CGPoint.zero)
         UIGraphicsGetCurrentContext()?.scaleBy(x: scale, y: scale)
         layer.render(in: UIGraphicsGetCurrentContext()!)
-        return UIGraphicsGetImageFromCurrentImageContext()
+        retImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return retImage
+
     }
 }

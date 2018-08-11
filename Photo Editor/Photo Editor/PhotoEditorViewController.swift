@@ -171,6 +171,11 @@ public final class PhotoEditorViewController: UIViewController {
         bottomToolbar.isHidden = hide
         bottomGradient.isHidden = hide
     }
+
+    // we need to force portrait b/c otherwise, the annotations/stickers don't save properly
+    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
 }
 
 extension PhotoEditorViewController: ColorDelegate {

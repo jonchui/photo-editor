@@ -46,8 +46,8 @@ public final class PhotoEditorViewController: UIViewController {
      */
     public var allowInlineTextEditing : Bool = false
 
-    public var photoEditorDelegate: PhotoEditorDelegate?
-    var colorsCollectionViewDelegate: ColorsCollectionViewDelegate!
+    public weak var photoEditorDelegate: PhotoEditorDelegate?
+    var colorsCollectionViewDelegate: ColorsCollectionViewDelegate?
 
     #if DEBUG
     // Just for testing unlimited photos
@@ -145,9 +145,11 @@ public final class PhotoEditorViewController: UIViewController {
         layout.minimumLineSpacing = 0
         colorsCollectionView.collectionViewLayout = layout
         colorsCollectionViewDelegate = ColorsCollectionViewDelegate()
-        colorsCollectionViewDelegate.colorDelegate = self
-        if !colors.isEmpty {
-            colorsCollectionViewDelegate.colors = colors
+        if colorsCollectionViewDelegate != nil {
+            colorsCollectionViewDelegate!.colorDelegate = self
+            if !colors.isEmpty {
+                colorsCollectionViewDelegate!.colors = colors
+            }
         }
         colorsCollectionView.delegate = colorsCollectionViewDelegate
         colorsCollectionView.dataSource = colorsCollectionViewDelegate

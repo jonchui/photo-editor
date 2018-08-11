@@ -58,6 +58,8 @@ public final class PhotoEditorViewController: UIViewController {
         if (automaticallySavePhoto) {
             continueButtonPressed(doneButton)
         }
+
+        setImageViewConstraintByImageHeight(self.image)
     }
 
     deinit {
@@ -91,6 +93,12 @@ public final class PhotoEditorViewController: UIViewController {
 
     var stickersViewController: StickersViewController!
 
+    // We need to force portrait b/c otherwise, the annotations/stickers don't save properly.
+    // See: https://github.com/jonchui/photo-editor/issues/1
+    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
     //Register Custom font before we load XIB
     public override func loadView() {
         registerFont()
@@ -161,8 +169,7 @@ public final class PhotoEditorViewController: UIViewController {
 
     func setImageView(image: UIImage) {
         imageView.image = image
-        let size = image.suitableSize(widthLimit: UIScreen.main.bounds.width)
-        imageViewHeightConstraint.constant = (size?.height)!
+        setImageViewConstraintByImageHeight(image)
     }
 
     func hideToolbar(hide: Bool) {
@@ -171,6 +178,18 @@ public final class PhotoEditorViewController: UIViewController {
         bottomToolbar.isHidden = hide
         bottomGradient.isHidden = hide
     }
+
+    // MARK: private functions
+
+    // image constraint must be set every time the image view changes.
+    // TODO: should we just listen to changes to imageview? there's got to be a better way ?
+    fileprivate func setImageViewConstraintByImageHeight(_ image: UIImage?) {
+        if let image = image {
+            let size = image.suitableSize(widthLimit: UIScreen.main.bounds.width)
+            imageViewHeightConstraint.constant = (size?.height)!
+        }
+    }
+
 }
 
 extension PhotoEditorViewController: ColorDelegate {

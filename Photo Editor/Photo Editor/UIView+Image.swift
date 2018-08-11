@@ -13,7 +13,7 @@ extension UIView {
     /**
      Convert UIView to UIImage
      */
-    func toImagePreservingOrignalResolution(originalImage: UIImage) -> UIImage {
+    public func toImagePreservingOrignalResolution(originalImage: UIImage) -> UIImage {
         return build(originalImage, workingView:self)!
 //        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 0.0)
 //        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)

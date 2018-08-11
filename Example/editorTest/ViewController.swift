@@ -9,6 +9,16 @@
 import UIKit
 import iOSPhotoEditor
 
+// Here, to mimic bug: https://github.com/jonchui/photo-editor/issues/1
+extension UIImagePickerController {
+    override open var shouldAutorotate: Bool {
+        return true
+    }
+    override open var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .all
+    }
+}
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!

@@ -32,7 +32,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      UIPanGestureRecognizer - Moving Objects
      Selecting transparent parts of the imageview won't move the object
      */
-    func panGesture(_ recognizer: UIPanGestureRecognizer) {
+    @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
         dismissActiveTextViewIfAvailable()
         guard !userIsPinchingOrRotatingEntireScreen else {
             if logExtraDebug {
@@ -141,7 +141,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         textView.bounds.size = sizeToFit
     }
 
-    fileprivate func setGlobalStateForPinchingORRotating(_ state: UIGestureRecognizerState) {
+    fileprivate func setGlobalStateForPinchingORRotating(_ state: UIGestureRecognizer.State) {
         if logExtraDebug {
             print("pinching state: \(state.rawValue)")
         }
@@ -160,7 +160,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      UIPinchGestureRecognizer - Pinches last selected view
      If it's a UITextView will make the font bigger so it doen't look pixlated
      */
-    func pinchGesture(_ recognizer: UIPinchGestureRecognizer) {
+    @objc func pinchGesture(_ recognizer: UIPinchGestureRecognizer) {
         if logExtraDebug {
             print("pinch")
         }
@@ -229,7 +229,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
     /**
      UIRotationGestureRecognizer - Rotating the `lastSelectedView` object, iff it's ImageType#allowRotation is true
      */
-    func globalRotationGesture(_ recognizer: UIRotationGestureRecognizer) {
+    @objc func globalRotationGesture(_ recognizer: UIRotationGestureRecognizer) {
         setGlobalStateForPinchingORRotating(recognizer.state)
         dismissActiveTextViewIfAvailable()
 
@@ -250,7 +250,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
      UITapGestureRecognizer - Taping on Objects
      Will make scale scale Effect
      */
-    func tapGesture(_ recognizer: UITapGestureRecognizer) {
+    @objc func tapGesture(_ recognizer: UITapGestureRecognizer) {
         dismissActiveTextViewIfAvailable()
         guard !userIsPinchingOrRotatingEntireScreen else {
             if logExtraDebug {
@@ -292,7 +292,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         return false
     }
 
-    func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+    @objc func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
         if recognizer.state == .recognized {
             if !stickersVCIsVisible {
                 addStickersViewController()
@@ -312,7 +312,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
         if logExtraDebug {
             print("scaling: \(view)")
         }
-        view.superview?.bringSubview(toFront: view)
+        view.superview?.bringSubviewToFront(view)
 
         if #available(iOS 10.0, *) {
             let generator = UIImpactFeedbackGenerator(style: .heavy)
@@ -347,7 +347,7 @@ extension PhotoEditorViewController : UIGestureRecognizerDelegate {
             self.setSelectedView(view)
         }
 
-        view.superview?.bringSubview(toFront: view)
+        view.superview?.bringSubviewToFront(view)
         view.center = CGPoint(x: view.center.x + recognizer.translation(in: canvasImageView).x,
                               y: view.center.y + recognizer.translation(in: canvasImageView).y)
 

@@ -14,7 +14,7 @@ extension UIImagePickerController {
     override open var shouldAutorotate: Bool {
         return true
     }
-    override open var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .all
     }
 }
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
     // returns whether saved correctly or not
     func saveImageDocumentDirectory(_ image: UIImage, path: String) -> Bool {
         let fileManager = FileManager.default
-        let imageData = UIImageJPEGRepresentation(image, 0.6)
+        let imageData = image.jpegData(compressionQuality: 0.6)
         return fileManager.createFile(atPath: path, contents: imageData, attributes: nil)
     }
 
@@ -91,10 +91,8 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         present(photoEditor, animated: true, completion: nil)
     }
 
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String: Any]) {
-
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        guard let image = info[.originalImage] as? UIImage else {
             picker.dismiss(animated: true, completion: nil)
             return
         }

@@ -13,7 +13,7 @@ public final class PhotoEditorViewController: UIViewController {
     /** holding the 2 imageViews original image and drawing & stickers */
     @IBOutlet weak var canvasView: UIView!
     //To hold the image
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet @objc var imageView: UIImageView!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     //To hold the drawings and stickers
     @IBOutlet weak var canvasImageView: UIImageView!
@@ -119,12 +119,12 @@ public final class PhotoEditorViewController: UIViewController {
         edgePan.delegate = self
         self.view.addGestureRecognizer(edgePan)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow),
-                                               name: .UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
-                                               name: .UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillChangeFrame(_:)),
-                                               name: .UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PhotoEditorViewController.keyboardDidShow),
+                                               name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PhotoEditorViewController.keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,selector: #selector(PhotoEditorViewController.keyboardWillChangeFrame(_:)),
+                                               name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 
         configureCollectionView()
         stickersViewController = StickersViewController(nibName: "StickersViewController", bundle: Bundle(for: StickersViewController.self))
@@ -137,7 +137,7 @@ public final class PhotoEditorViewController: UIViewController {
 
         // add global rotate gesture
         let globalRotationGestureRecognizer = UIRotationGestureRecognizer(target: self,
-                                                                    action:#selector(PhotoEditorViewController.globalRotationGesture) )
+                                                                          action:#selector(PhotoEditorViewController.globalRotationGesture) )
         globalRotationGestureRecognizer.delegate = self
         self.view.addGestureRecognizer(globalRotationGestureRecognizer)
 

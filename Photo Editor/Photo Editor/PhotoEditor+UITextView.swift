@@ -28,7 +28,7 @@ extension PhotoEditorViewController: UITextViewDelegate {
         self.setSelectedView(textView)
 
         // make text visible for editing
-        textView.superview?.bringSubview(toFront: textView)
+        textView.superview?.bringSubviewToFront(textView)
         textView.font = UIFont(name: "Helvetica", size: 25)
         textView.textColor = UIColor.red
 

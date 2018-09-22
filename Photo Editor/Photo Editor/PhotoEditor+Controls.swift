@@ -79,9 +79,9 @@ extension PhotoEditorViewController {
     }
 
     func showWarningAlertBeforeClosing() {
-        let alert = UIAlertController(title: "Are You Sure", message: "You are about to delete the image, this can not be undone", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel))
-        alert.addAction(UIAlertAction(title: "Delete the image", style: UIAlertActionStyle.destructive) { [weak self] _ in
+        let alert = UIAlertController(title: "Are You Sure", message: "You are about to delete the image, this can not be undone", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel))
+        alert.addAction(UIAlertAction(title: "Delete the image", style: UIAlertAction.Style.destructive) { [weak self] _ in
             self?.photoEditorDelegate?.canceledEditing()
             self?.dismiss(animated: true, completion: nil)
         })
@@ -100,8 +100,8 @@ extension PhotoEditorViewController {
     //MAKR: helper methods
 
     func image(_ image: UIImage, withPotentialError error: NSErrorPointer, contextInfo: UnsafeRawPointer) {
-        let alert = UIAlertController(title: "Image Saved", message: "Image successfully saved to Photos library", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: "Image Saved", message: "Image successfully saved to Photos library", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }
